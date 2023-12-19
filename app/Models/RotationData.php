@@ -14,4 +14,16 @@ class RotationData extends Model
         'driver_id',
         'date',
     ];
+
+    //使用者
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //輪值名單
+    public function rotationList()
+    {
+        return $this->belongsTo(RotationList::class);
+    }
 }

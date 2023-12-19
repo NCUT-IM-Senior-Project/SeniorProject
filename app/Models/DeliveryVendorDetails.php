@@ -17,4 +17,10 @@ class DeliveryVendorDetails extends Model
         'work_number',
         'description',
     ];
+
+    //送貨單
+    public function deliveryOrder()
+    {
+        return $this->belongsTo(DeliveryOrder::class);
+    }
 }

@@ -14,4 +14,10 @@ class PlanDetailStatus extends Model
     protected $fillable = [
         'name',
     ];
+
+    //配送排程明細
+    public function deliveryPlanDetails()
+    {
+        return $this->hasMany(DeliveryPlanDetails::class);
+    }
 }

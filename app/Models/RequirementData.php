@@ -15,4 +15,22 @@ class RequirementData extends Model
         'vendor_client_id',
         'requirement_id',
     ];
+
+    //廠商
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    //客戶
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    //需求項目
+    public function requirementItem()
+    {
+        return $this->belongsTo(RequirementItem::class);
+    }
 }

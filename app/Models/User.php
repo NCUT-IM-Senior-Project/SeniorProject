@@ -46,4 +46,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //權限
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class);
+    }
+
+    //輪值資料
+    public function rotationData()
+    {
+        return $this->hasMany(RotationData::class);
+    }
+
+    //車輛
+    public function car()
+    {
+        return $this->hasMany(Car::class);
+    }
+
+    //配送單
+    public function deliveryServiceOrder()
+    {
+        return $this->hasMany(DeliveryServiceOrder::class);
+    }
+
+    //送貨單
+    public function deliveryOrder()
+    {
+        return $this->hasMany(DeliveryOrder::class);
+    }
 }

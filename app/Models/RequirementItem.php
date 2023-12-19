@@ -14,4 +14,10 @@ class RequirementItem extends Model
     protected $fillable = [
         'name',
     ];
+
+    //需求資料
+    public function requirementData()
+    {
+        return $this->hasMany(RequirementData::class);
+    }
 }

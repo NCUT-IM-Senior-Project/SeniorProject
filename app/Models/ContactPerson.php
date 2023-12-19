@@ -14,4 +14,16 @@ class ContactPerson extends Model
         'name',
         'phone',
     ];
+
+    //廠商
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    //客戶
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

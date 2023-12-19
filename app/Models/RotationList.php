@@ -12,4 +12,22 @@ class RotationList extends Model
     protected $fillable = [
         'verdor_client_id',
     ];
+
+    //輪值資料
+    public function rotationData()
+    {
+        return $this->hasMany(RotationData::class);
+    }
+
+    //客戶
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    //廠商
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }

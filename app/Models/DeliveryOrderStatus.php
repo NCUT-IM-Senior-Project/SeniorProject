@@ -14,4 +14,10 @@ class DeliveryOrderStatus extends Model
     protected $fillable = [
         'name',
     ];
+
+    //送貨單
+    public function deliveryOrders()
+    {
+        return $this->hasMany(DeliveryOrder::class);
+    }
 }

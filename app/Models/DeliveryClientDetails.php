@@ -17,4 +17,10 @@ class DeliveryClientDetails extends Model
         'weight',
         'description',
     ];
+
+    //送貨單
+    public function deliveryOrder()
+    {
+        return $this->belongsTo(DeliveryOrder::class);
+    }
 }

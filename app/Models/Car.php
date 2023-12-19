@@ -21,4 +21,16 @@ class Car extends Model
         'tailgate',
         'driver_id',
     ];
+
+    //使用者
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //配送單
+    public function deliveryServiceOrders()
+    {
+        return $this->hasMany(DeliveryServiceOrder::class);
+    }
 }

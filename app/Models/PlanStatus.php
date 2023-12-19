@@ -14,4 +14,10 @@ class PlanStatus extends Model
     protected $fillable = [
         'name',
     ];
+
+    //配送單
+    public function deliveryServiceOrders()
+    {
+        return $this->hasMany(DeliveryServiceOrder::class);
+    }
 }

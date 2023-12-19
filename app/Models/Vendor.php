@@ -17,4 +17,28 @@ class Vendor extends Model
         'fax',
         'description',
     ];
+
+    //輪值資料
+    public function rotationData()
+    {
+        return $this->hasOne(RotationData::class);
+    }
+
+    //聯絡人
+    public function contactPerson()
+    {
+        return $this->hasMany(ContactPerson::class);
+    }
+
+    //需求資料
+    public function requirementData()
+    {
+        return $this->hasMany(RequirementData::class);
+    }
+
+    //送貨單
+    public function deliveryOrder()
+    {
+        return $this->hasMany(DeliveryOrder::class);
+    }
 }
