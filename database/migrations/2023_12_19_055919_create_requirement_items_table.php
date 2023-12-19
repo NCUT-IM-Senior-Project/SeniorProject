@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('requirement_items', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); //編號
+            $table->string('name'); //項目名稱
         });
     }
 

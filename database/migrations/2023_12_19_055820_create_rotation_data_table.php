@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rotation_data', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //編號
+            $table->unsignedBigInteger('rotation_list_id'); //輪值編號
+            $table->unsignedBigInteger('driver_id'); //司機編號
+            $table->dateTime('date')->nullable(); //日期
             $table->timestamps();
         });
     }

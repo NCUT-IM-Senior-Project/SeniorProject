@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plan_detail_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); //編號
+            $table->string('name'); //排程細項狀態名稱
         });
     }
 

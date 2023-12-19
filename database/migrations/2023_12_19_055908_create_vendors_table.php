@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vendors', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //編號
+            $table->string('vendor_id'); //廠商編號
+            $table->string('name'); //廠商公司名稱
+            $table->string('address'); //地址
+            $table->string('land_line'); //室內電話
+            $table->string('fax'); //傳真
+            $table->string('description')->nullable(); //備註說明
             $table->timestamps();
         });
     }

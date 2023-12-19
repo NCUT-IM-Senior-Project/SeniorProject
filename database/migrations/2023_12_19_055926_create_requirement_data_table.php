@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('requirement_data', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); //編號
+            $table->string('vendor_client_id'); //廠商客戶編號
+            $table->unsignedBigInteger('requirement_id'); //需求編號
         });
     }
 

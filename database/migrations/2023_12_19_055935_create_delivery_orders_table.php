@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('delivery_orders', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //編號
+            $table->string('keynote')->nullable(); //主旨
+            $table->string('vendor_client_id'); //廠商客戶編號
+            $table->string('order_number'); //訂單編號
+            $table->unsignedBigInteger('logistics_id'); //物流類型
+            $table->dateTime('scheduled_at')->nullable(); //預定交期
+            $table->dateTime('shipment_at')->nullable(); //出貨日期
+            $table->unsignedBigInteger('delivery_status_id'); //狀態
+            $table->unsignedBigInteger('created_by'); //創建者
             $table->timestamps();
         });
     }
