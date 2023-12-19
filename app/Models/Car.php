@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use HasFactory;
+    // 關閉自動更新時間戳記
+    public $timestamps = false;
+
+    protected $fillable = [
+        'number',
+        'brand',
+        'color',
+        'type',
+        'Oils',
+        'tonnage',
+        'tailgate',
+        'driver_id',
+    ];
 }

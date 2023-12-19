@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RotationList extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'verdor_client_id',
+    ];
 }

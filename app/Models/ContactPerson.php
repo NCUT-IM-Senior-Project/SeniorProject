@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ContactPerson extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'vendor_client_id',
+        'name',
+        'phone',
+    ];
 }

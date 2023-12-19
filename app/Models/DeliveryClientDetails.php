@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class DeliveryClientDetails extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'delivery_order_id',
+        'name',
+        'specification',
+        'quantity',
+        'weight',
+        'description',
+    ];
 }

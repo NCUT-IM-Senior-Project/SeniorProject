@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
+    // 關閉自動更新時間戳記
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+    ];
 }

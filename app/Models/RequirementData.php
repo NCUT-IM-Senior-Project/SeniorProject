@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class RequirementData extends Model
 {
     use HasFactory;
+    // 關閉自動更新時間戳記
+    public $timestamps = false;
+
+    protected $fillable = [
+        'vendor_client_id',
+        'requirement_id',
+    ];
 }
