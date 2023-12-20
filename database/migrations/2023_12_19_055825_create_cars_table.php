@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id(); //編號
-            $table->unsignedBigInteger('number'); //車牌號碼
+            $table->string('number'); //車牌號碼
             $table->string('brand'); //品牌
             $table->string('color'); //車色
             $table->string('type'); //車型 例：中小型汽車

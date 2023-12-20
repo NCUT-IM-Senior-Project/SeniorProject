@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact_person', function (Blueprint $table) {
+        Schema::create('contact_people', function (Blueprint $table) {
             $table->id(); //編號
             $table->string('vendor_client_id'); //廠商客戶編號
             $table->string('name'); //姓名
-            $table->unsignedBigInteger('phone'); //電話
+            $table->string('phone'); //電話
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact_person');
+        Schema::dropIfExists('contact_people');
     }
 };
