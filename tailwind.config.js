@@ -18,6 +18,8 @@ module.exports = {
         },
     },
 
+    darkMode: 'class',
+
     plugins: [
         forms,
         require('preline/plugin'),
