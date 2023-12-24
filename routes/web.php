@@ -18,12 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     //儀表板-首頁 dashboard
     Route::get('/', function () {return view('dashboard');});
-});
 
-Route::middleware('auth')->group(function () {
+    //個人檔案 Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::middleware('checkPermissions:1')->group(function () {
+
+    });
+
+    Route::middleware('checkPermissions:2')->group(function () {
+
+    });
 });
 
 require __DIR__.'/auth.php';
