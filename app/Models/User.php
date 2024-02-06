@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(DeliveryOrder::class);
     }
+
+    //檢查使用者是否有權限
+    public function hasAnyPermission($permissions)
+    {
+        // 使用者的權限
+        $userPermission = $this->permission_id;
+
+        // 檢查使用者是否有任意一個權限
+        return in_array($userPermission, $permissions);
+    }
 }
