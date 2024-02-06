@@ -18,13 +18,18 @@
 @include('layouts.partials.navigation')
 
 <!-- Content -->
-<div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72 ">
+<div class="w-full pt-4 px-4 sm:px-6 md:px-8 lg:ps-72 ">
 
     <main>
         <!-- Toast Component -->
         @include('components.toasts')
+        <div class="flex flex-col space-y-4">
+            <!--form -->
+            @yield('page-form')
 
-        @yield('page-content')
+            @yield('page-content')
+        </div>
+
     </main>
 
 </div>
