@@ -15,14 +15,14 @@ class DriverController extends Controller
      */
     public function index()
     {
-        $drivers = User::paginate(9);
+        $drivers = User::where('permission_id', 2)->paginate(9);
         return view('driver.index', compact('drivers'));
     }
 
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $drivers = User::where('name', 'like', '%' . $search . '%')->paginate(9);
+        $drivers = User::where('permission_id', 2)->where('name', 'like', '%' . $search . '%')->paginate(9);
 
         return view('driver.index', compact('drivers'));
     }
@@ -89,7 +89,7 @@ class DriverController extends Controller
     public function edit(User $driver)
     {
         $editDriver = $driver;
-        $drivers = User::paginate(9);
+        $drivers = User::where('permission_id', 2)->paginate(9);
         return view('driver.index', compact('drivers', 'editDriver'));
     }
 

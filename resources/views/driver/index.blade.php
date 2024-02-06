@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '管理司機')
+@section('title', '管理司機資料')
 
 
 
