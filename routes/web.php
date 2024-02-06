@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,19 @@ Route::middleware('auth')->group(function () {
         Route::patch('driver/{editDriver}', [DriverController::class, 'update'])->name('driver.update');
         //管理司機資料-刪除
         Route::delete('driver/{driver}', [DriverController::class, 'destroy'])->name('driver.destroy');
+
+        //管理客戶資料
+        Route::get('client', [ClientController::class, 'index'])->name('client.index');
+        //管理客戶資料-搜尋
+        Route::get('client/search', [ClientController::class, 'search'])->name('client.search');
+        //管理客戶資料-新增
+        Route::post('client', [ClientController::class, 'store'])->name('client.store');
+        //管理客戶資料-編輯
+        Route::get('client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
+        //管理客戶資料-更新
+        Route::patch('client/{editClient}', [ClientController::class, 'update'])->name('client.update');
+        //管理客戶資料-刪除
+        Route::delete('client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
     });
 
     /* 司機才能進入的路由 */
