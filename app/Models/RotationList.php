@@ -10,7 +10,7 @@ class RotationList extends Model
     use HasFactory;
 
     protected $fillable = [
-        'verdor_client_id',
+        'partner_id',
     ];
 
     //輪值資料

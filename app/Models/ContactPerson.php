@@ -10,7 +10,7 @@ class ContactPerson extends Model
     use HasFactory;
 
     protected $fillable = [
-        'vendor_client_id',
+        'partner_id',
         'name',
         'phone',
     ];
@@ -24,6 +24,6 @@ class ContactPerson extends Model
     //客戶
     public function client()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class, 'partner_id', 'id');
     }
 }

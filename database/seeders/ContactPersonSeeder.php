@@ -17,12 +17,12 @@ class ContactPersonSeeder extends Seeder
     {
         $faker = Faker::create('zh_TW');
 
-        $clientIds = Client::all()->pluck('client_id')->toArray();
-        $vendorIds = Vendor::all()->pluck('vendor_id')->toArray();
+        $clientIds = Client::all()->pluck('partner_id')->toArray();
+        $vendorIds = Vendor::all()->pluck('partner_id')->toArray();
 
         foreach ($clientIds as $clientId) {
             ContactPerson::create([
-                'vendor_client_id' => $clientId,
+                'partner_id' => $clientId,
                 'name' => $faker->name,
                 'phone' => $faker->phoneNumber,
             ]);
@@ -30,7 +30,7 @@ class ContactPersonSeeder extends Seeder
 
         foreach ($vendorIds as $vendorId) {
             ContactPerson::create([
-                'vendor_client_id' => $vendorId,
+                'partner_id' => $vendorId,
                 'name' => $faker->name,
                 'phone' => $faker->phoneNumber,
             ]);

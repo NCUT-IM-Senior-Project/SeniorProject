@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rotation_lists', function (Blueprint $table) {
             $table->id(); //編號
-            $table->string('verdor_client_id'); //廠商客戶編號
+            $table->string('partner_id'); //廠商客戶編號
             $table->timestamps();
         });
     }

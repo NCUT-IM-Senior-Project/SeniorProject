@@ -17,7 +17,7 @@ class VendorFactory extends Factory
     public function definition(): array
     {
         return [
-            'vendor_id' => 'B' . str_pad($this->faker->unique()->randomNumber(4), 4, '0', STR_PAD_LEFT),
+            'partner_id' => 'B' . str_pad($this->faker->unique()->randomNumber(4), 4, '0', STR_PAD_LEFT),
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'land_line' => $this->faker->phoneNumber(),

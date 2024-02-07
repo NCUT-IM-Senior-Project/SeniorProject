@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('contact_people', function (Blueprint $table) {
             $table->id(); //編號
-            $table->string('vendor_client_id'); //廠商客戶編號
+            $table->string('partner_id'); //廠商客戶編號
             $table->string('name'); //姓名
             $table->string('phone'); //電話
             $table->timestamps();

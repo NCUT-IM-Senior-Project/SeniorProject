@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('requirement_data', function (Blueprint $table) {
             $table->id(); //編號
-            $table->string('vendor_client_id'); //廠商客戶編號
-            $table->unsignedBigInteger('requirement_id'); //需求編號
+            $table->string('partner_id'); //廠商客戶編號
+            $table->unsignedBigInteger('requirement_items_id'); //需求編號
         });
     }
 

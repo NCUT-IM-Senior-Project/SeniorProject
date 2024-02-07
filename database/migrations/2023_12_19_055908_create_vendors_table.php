@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id(); //編號
-            $table->string('vendor_id'); //廠商編號
+            $table->string('partner_id'); //廠商編號
             $table->string('name'); //廠商公司名稱
             $table->string('address'); //地址
             $table->string('land_line'); //室內電話

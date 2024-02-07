@@ -17,12 +17,12 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id' => 'A' . str_pad($this->faker->unique()->randomNumber(4), 4, '0', STR_PAD_LEFT),
+            'partner_id' => 'A' . str_pad($this->faker->unique()->randomNumber(4), 4, '0', STR_PAD_LEFT),
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'land_line' => $this->faker->phoneNumber(),
             'fax' => $this->faker->phoneNumber(),
-            'description' => $this->faker->text(),
+            'description' => $this->faker->text(10),
         ];
     }
 }

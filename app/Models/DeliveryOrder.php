@@ -11,7 +11,7 @@ class DeliveryOrder extends Model
 
     protected $fillable = [
         'keynote',
-        'vendor_client_id',
+        'partner_id',
         'order_number',
         'logistics_id',
         'scheduled_at',

@@ -18,13 +18,13 @@ class RequirementDataSeeder extends Seeder
     {
         $faker = Faker::create('zh_TW');
 
-        $clientIds = Client::all()->pluck('client_id')->toArray();
+        $clientIds = Client::all()->pluck('partner_id')->toArray();
         //$vendorIds = Vendor::all()->pluck('vendor_id')->toArray();
 
         foreach ($clientIds as $clientId) {
             RequirementData::create([
-                'vendor_client_id' => $clientId,
-                'requirement_id' => $faker->randomElement(['1', '2']),
+                'partner_id' => $clientId,
+                'requirement_items_id' => $faker->randomElement(['1', '2']),
             ]);
         }
     }

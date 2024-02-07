@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('delivery_orders', function (Blueprint $table) {
             $table->id(); //編號
             $table->string('keynote')->nullable(); //主旨
-            $table->string('vendor_client_id'); //廠商客戶編號
+            $table->string('partner_id'); //廠商客戶編號
             $table->string('order_number'); //訂單編號
             $table->unsignedBigInteger('logistics_id'); //物流類型
             $table->dateTime('scheduled_at')->nullable(); //預定交期

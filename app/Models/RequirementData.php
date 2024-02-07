@@ -12,8 +12,8 @@ class RequirementData extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'vendor_client_id',
-        'requirement_id',
+        'partner_id',
+        'requirement_items_id',
     ];
 
     //廠商

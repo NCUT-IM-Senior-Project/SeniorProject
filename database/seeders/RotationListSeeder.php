@@ -15,7 +15,7 @@ class RotationListSeeder extends Seeder
     {
         for ($i = 1; $i < 4; $i++) {
             RotationList::create([
-                'verdor_client_id' => $i,
+                'partner_id' => $i,
             ]);
         }
     }
