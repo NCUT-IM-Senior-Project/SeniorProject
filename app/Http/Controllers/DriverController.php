@@ -40,7 +40,6 @@ class DriverController extends Controller
      */
     public function store(StoreDriverRequest $request)
     {
-
         try {
             // 獲取已驗證的數據
             $validatedData = $request->validated();
@@ -114,7 +113,7 @@ class DriverController extends Controller
         $driver->delete();
 
         return redirect(route('driver.index'))->with([
-            'success' => '書籍 [編號：'. $driver-> id.'] 刪除成功！',
+            'success' => '司機 [編號：'. $driver-> id.'] 刪除成功！',
             'type' => 'success',
         ]);
     }

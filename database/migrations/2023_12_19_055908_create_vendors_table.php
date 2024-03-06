@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendors', function (Blueprint $table) {
+        Schema::create('vendor', function (Blueprint $table) {
             $table->id(); //編號
             $table->string('partner_id'); //廠商編號
             $table->string('name'); //廠商公司名稱
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendors');
+        Schema::dropIfExists('vendor');
     }
 };
