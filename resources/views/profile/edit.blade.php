@@ -16,11 +16,13 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 shadow sm:rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+            @if( Auth::user()->permission_id == 1)
+                <div class="p-4 sm:p-8 shadow sm:rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                    <div class="max-w-xl">
+                        @include('profile.partials.delete-user-form')
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 
