@@ -133,4 +133,9 @@ class DriverController extends Controller
             'type' => 'success',
         ]);
     }
+
+    public function batch()
+    {
+        return view('driver.batch');
+    }
 }

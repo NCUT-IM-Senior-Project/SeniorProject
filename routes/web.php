@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::patch('driver/{editDriver}', [DriverController::class, 'update'])->name('driver.update');
         //管理司機資料-刪除
         Route::delete('driver/{driver}', [DriverController::class, 'destroy'])->name('driver.destroy');
+        //管理司機資料-批次
+        Route::get('driver/batch', [DriverController::class, 'batch'])->name('driver.batch');
 
         //管理客戶資料
         Route::get('client', [ClientController::class, 'index'])->name('client.index');
