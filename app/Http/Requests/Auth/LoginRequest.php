@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,16 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+
+        // 檢查帳戶是否停權
+        $user = User::where('email', $this->input('email'))->first();
+
+        if ($user && $user->status == 1) {
+            // 如果帳戶被停權，可以選擇拋出例外或進行其他處理
+            throw ValidationException::withMessages([
+                'email' => trans('> 您的帳號已被停權 (auth.account_disabled)'),
+            ]);
+        }
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

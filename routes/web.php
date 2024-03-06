@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
         //管理客戶資料-批次
         Route::get('client/batch', [ClientController::class, 'batch'])->name('client.batch');
 
+
         //管理廠商資料
         Route::get('vendor', [VendorController::class, 'index'])->name('vendor.index');
         //管理廠商資料-搜尋
@@ -76,6 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::get('vendor/batch', [VendorController::class, 'batch'])->name('vendor.batch');
         //管理廠商資料-批次下載excel範本
         Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+
 
     });
 

@@ -16,6 +16,12 @@ class DriverController extends Controller
     public function index()
     {
         $drivers = User::where('permission_id', 2)->paginate(9);
+        //$drivers status 0:啟用 1:停用
+        $drivers->map(function ($driver) {
+            $driver->status = $driver->status == 0 ? '啟用' : '停用';
+            return $driver;
+        });
+
         return view('driver.index', compact('drivers'));
     }
 
@@ -23,7 +29,11 @@ class DriverController extends Controller
     {
         $search = $request->input('search');
         $drivers = User::where('permission_id', 2)->where('name', 'like', '%' . $search . '%')->paginate(9);
-
+        //$drivers status 0:啟用 1:停用
+        $drivers->map(function ($driver) {
+            $driver->status = $driver->status == 0 ? '啟用' : '停用';
+            return $driver;
+        });
         return view('driver.index', compact('drivers'));
     }
 
@@ -89,6 +99,11 @@ class DriverController extends Controller
     {
         $editDriver = $driver;
         $drivers = User::where('permission_id', 2)->paginate(9);
+        //$drivers status 0:啟用 1:停用
+        $drivers->map(function ($driver) {
+            $driver->status = $driver->status == 0 ? '啟用' : '停用';
+            return $driver;
+        });
         return view('driver.index', compact('drivers', 'editDriver'));
     }
 
@@ -113,7 +128,11 @@ class DriverController extends Controller
         $driver->delete();
 
         return redirect(route('driver.index'))->with([
+<<<<<<< HEAD
             'success' => '司機 [編號：'. $driver-> id.'] 刪除成功！',
+=======
+            'success' => '帳號 [編號：'. $driver-> id.'] 刪除成功！',
+>>>>>>> d8a91e471d3c1c3ef7b80b8d0146813e88a15073
             'type' => 'success',
         ]);
     }
