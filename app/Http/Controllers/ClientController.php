@@ -103,4 +103,8 @@ class ClientController extends Controller
     {
         //
     }
+    public function batch()
+    {
+        return view('client.batch');
+    }
 }

@@ -25,7 +25,7 @@ class DeliveryOrderSeeder extends Seeder
             DeliveryOrder::create([
                 'keynote' => '測試資料',
                 'partner_id' => $clientIds[array_rand($clientIds)],
-                'order_number' => 'B' . str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT),
+                'order_number' => 'B' . str_pad(mt_rand(1, 999999999), 10, '0', STR_PAD_LEFT),
                 'logistics_id' => $faker->numberBetween(2, 3),
                 'scheduled_at' => null,
                 'shipment_at' => $faker->dateTimeBetween('now', '+1 week'),
@@ -39,7 +39,7 @@ class DeliveryOrderSeeder extends Seeder
             DeliveryOrder::create([
                 'keynote' => '測試資料',
                 'partner_id' => $vendorIds[array_rand($vendorIds)],
-                'order_number' => 'P' . str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT),
+                'order_number' => 'P' . str_pad(mt_rand(1, 999999999), 10, '0', STR_PAD_LEFT),
                 'logistics_id' => $faker->numberBetween(0, 1),
                 'scheduled_at' => $faker->dateTimeBetween('now', '+2 week'),
                 'shipment_at' => $faker->dateTimeBetween('now', '+1 week'),

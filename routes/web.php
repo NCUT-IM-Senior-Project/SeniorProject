@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
         Route::patch('client/{editClient}', [ClientController::class, 'update'])->name('client.update');
         //管理客戶資料-刪除
         Route::delete('client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+        //管理客戶資料-批次
+        Route::get('client/batch', [ClientController::class, 'batch'])->name('client.batch');
     });
 
     /* 司機才能進入的路由 */
