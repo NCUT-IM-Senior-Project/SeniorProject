@@ -128,11 +128,7 @@ class DriverController extends Controller
         $driver->delete();
 
         return redirect(route('driver.index'))->with([
-<<<<<<< HEAD
-            'success' => '司機 [編號：'. $driver-> id.'] 刪除成功！',
-=======
             'success' => '帳號 [編號：'. $driver-> id.'] 刪除成功！',
->>>>>>> d8a91e471d3c1c3ef7b80b8d0146813e88a15073
             'type' => 'success',
         ]);
     }
