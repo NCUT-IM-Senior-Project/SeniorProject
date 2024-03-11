@@ -10,31 +10,7 @@
 @endsection
 
 @section('page-content')
-    <div class="mx-left max-w-full px-2 py-3 sm:px-2 sm:py-8 lg:px-8 flex items-center justify-start">
-
-        <button  id="downloadExcelBtn"  type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 ml-4">
-            下載 Excel 範本
-        </button>
-
-        <!-- 選擇檔案區域 -->
-        <div class="flex items-center mt-0 ml-4" >
-            <label class="block">
-                <span class="sr-only">選擇檔案</span>
-                <input type="file" class="block w-full text-sm text-gray-500
-                file:me-3 file:py-2 file:px-5
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-600 file:text-white
-                hover:file:bg-blue-700
-                file:disabled:opacity-50 file:disabled:pointer-events-none
-                dark:file:bg-blue-500
-                dark:hover:file:bg-blue-400 " accept=".xls, .xlsx">
-            </label>
-        </div>
-
-    </div>
-
-
+    <x-uploadexcel />
 
     <!-- 廠商資訊總覽 -->
     <p class="text-gray-600 text-sm dark:text-gray-200">廠商資料批次匯入</p>
@@ -56,8 +32,10 @@
                                         <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase" style="width: 13%; height: 40px;">傳真</th>
                                         <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase" style="width: 30%; height: 40px;">備註</th>
                                         <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase" style="width:  1%; height: 40px;"></th>
+
                                     </tr>
                                     </thead>
+
                                     <tbody>
                                     @for ($i = 1; $i <= 5; $i++)
                                         <tr>
@@ -88,6 +66,7 @@
                                                 </button>
                                             </td>
                                         </tr>
+
                                     @endfor
                                     </tbody>
                                 </table>
@@ -125,7 +104,9 @@
                                                 '<button class="delete-row px-2 py-2 rounded-md bg-red-600 text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus"><path d="M5 12h14"/></svg></button> </td>' +  // 添加刪除按鈕
                                                 '</tr>';
                                             lastRow.after(newRow);
+
                                         });
+
                                         // 刪除行
                                         $('#myTable tbody').on('click', 'button.delete-row', function() {
                                             $(this).closest('tr').remove();
