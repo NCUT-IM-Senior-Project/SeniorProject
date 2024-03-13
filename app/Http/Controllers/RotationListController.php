@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\RotationList;
 use App\Http\Requests\StoreRotationListRequest;
 use App\Http\Requests\UpdateRotationListRequest;
@@ -13,7 +14,18 @@ class RotationListController extends Controller
      */
     public function index()
     {
-        //
+        $rotationLists =RotationList::with('client')->paginate(9);
+        //$rotationLists = RotationList::all();
+        $rotationLists->map(function ($rotationList) {
+           $rotationList->partner_name = Client::where('partner_id', $rotationList->partner_id)->first()->name;
+
+            return $rotationList;
+        });
+
+        //  dd($rotationLists);
+
+        return view('rotation.index', compact('rotationLists'));
+
     }
 
     /**

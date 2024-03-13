@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RotationListController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +78,10 @@ Route::middleware('auth')->group(function () {
         Route::get('vendor/batch', [VendorController::class, 'batch'])->name('vendor.batch');
         //管理廠商資料-批次下載excel範本
         Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+
+
+        //設置輪班表
+        Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
 
 
     });
