@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateDriverRequest;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class DriverController extends Controller
 {
@@ -136,5 +137,14 @@ class DriverController extends Controller
     public function batch()
     {
         return view('driver.batch');
+    }
+
+    public function downloadExcelTemplate($page): BinaryFileResponse
+    {
+        // 根據不同頁面生成不同的 Excel 檔案路徑
+        $filePath = storage_path('app/public/' . $page . '.xlsx');
+
+        // 返回檔案作為二進制響應
+        return response()->download($filePath, $page . '.xlsx');
     }
 }

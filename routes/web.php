@@ -45,6 +45,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('driver/{driver}', [DriverController::class, 'destroy'])->name('driver.destroy');
         //管理司機資料-批次
         Route::get('driver/batch', [DriverController::class, 'batch'])->name('driver.batch');
+        //管理司機資料-批次下載excel範本
+        Route::get('/download-excel-template', [DriverController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+
 
         //管理客戶資料
         Route::get('client', [ClientController::class, 'index'])->name('client.index');
@@ -60,6 +63,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('client/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
         //管理客戶資料-批次
         Route::get('client/batch', [ClientController::class, 'batch'])->name('client.batch');
+        //管理客戶資料-批次下載excel範本
+        Route::get('/download-excel-template', [ClientController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
 
         //管理廠商資料
@@ -77,8 +82,8 @@ Route::middleware('auth')->group(function () {
         //管理廠商資料-批次
         Route::get('vendor/batch', [VendorController::class, 'batch'])->name('vendor.batch');
         //管理廠商資料-批次下載excel範本
-        Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
-
+     //   Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+        Route::get('/download-excel/{page}', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
         //設置輪班表
         Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');

@@ -122,10 +122,15 @@ class VendorController extends Controller
         return view('vendor.batch');
     }
 
-    public function downloadExcelTemplate(): BinaryFileResponse
-    {
-        $filePath = storage_path('app/public/Exvendorexcel.xlsx');
 
-        return response()->download($filePath, 'Exvendorexcel_template.xlsx');
+
+
+    public function downloadExcelTemplate($page): BinaryFileResponse
+    {
+        // 根據不同頁面生成不同的 Excel 檔案路徑
+        $filePath = storage_path('app/public/' . $page . '.xlsx');
+
+        // 返回檔案作為二進制響應
+        return response()->download($filePath, $page . '.xlsx');
     }
 }
