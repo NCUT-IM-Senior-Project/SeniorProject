@@ -10,7 +10,19 @@
 @endsection
 
 @section('page-content')
-    <x-uploadexcel />
+    @php
+        $currentPage = 'vendorexcel'; // 用實際的頁面標識替換 'your_value_here'
+    @endphp
+    @include('components.uploadexcel', ['currentPage' => $currentPage])
+     
+    <div class="flex sm:justify-end items-end space-x-2 sm:col-start-4 sm:row-start-2 col-span-4 row-start-6 ">
+        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            批次匯入
+        </button>
+        <a href="{{ route('vendor.index') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-300 text-gray-800 hover:bg-gray-400 dark:bg-slate-600 dark:text-gray-400 dark:hover:bg-slate-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            取消
+        </a>
+    </div>
 
     <!-- 廠商資訊總覽 -->
     <p class="text-gray-600 text-sm dark:text-gray-200">廠商資料批次匯入</p>
@@ -70,6 +82,8 @@
                                     @endfor
                                     </tbody>
                                 </table>
+
+
                                 <!-- JavaScript代碼 -->
                                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                 <script>
@@ -118,11 +132,7 @@
                                     });
                                 </script>
 
-                                <script>
-                                    document.getElementById('downloadExcelBtn').addEventListener('click', function() {
-                                        window.location.href = '{{ route("download-excel-template") }}';
-                                    });
-                                </script>
+
                             </div>
                         </div>
                     </div>
