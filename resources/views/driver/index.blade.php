@@ -55,7 +55,7 @@
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $driver -> phone }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $driver -> email }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $driver -> description }}</td>
-                                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $driver -> status }}</td>
+                                            <td class="px-6 py-2 whitespace-nowrap text-sm {{$driver -> status == '停權' ? 'text-red-500 dark:text-red-400' : 'text-green-500 dark:text-green-400'}}">{{ $driver -> status }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 <div class="flex items-center">
                                                     <a href="{{ route('driver.edit', $driver) }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">編輯</a>
