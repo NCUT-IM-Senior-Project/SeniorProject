@@ -142,7 +142,11 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client -> delete();
+        return redirect(route('client.index'))->with([
+            'success' => '客戶 '. $client-> name . ' 資料刪除成功！',
+            'type' => 'success',
+        ]);
     }
     public function batch()
     {
