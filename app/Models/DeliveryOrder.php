@@ -23,7 +23,7 @@ class DeliveryOrder extends Model
     //使用者
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     //廠商
@@ -36,6 +36,13 @@ class DeliveryOrder extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    // 廠商或客戶
+    public function partner()
+    {
+        return $this->belongsTo('App\Models\Vendor', 'partner_id', 'id')
+            ->orWhere('App\Models\Client', 'partner_id', 'id');
     }
 
     //送貨單明細(廠商)
@@ -53,13 +60,14 @@ class DeliveryOrder extends Model
     //物流類型
     public function logistic()
     {
-        return $this->belongsTo(Logistic::class);
+        return $this->belongsTo(Logistic::class, 'logistics_id', 'id');
+
     }
 
     //送貨單狀態
     public function deliveryOrderStatus()
     {
-        return $this->belongsTo(DeliveryOrderStatus::class);
+        return $this->belongsTo(DeliveryOrderStatus::class, 'delivery_status_id', 'id');
     }
 
     //配送排程明細
