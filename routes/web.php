@@ -87,8 +87,16 @@ Route::middleware('auth')->group(function () {
 
         //管理送貨單資料
         Route::get('deliveryorder', [DeliveryOrderController::class, 'index'])->name('deliveryorder.index');
-        //管理廠商資料-搜尋
+        //管理送貨單資料-搜尋
         Route::get('deliveryorder/search', [DeliveryOrderController::class, 'search'])->name('deliveryorder.search');
+        //管理送貨單資料-新增
+        Route::post('deliveryorder', [DeliveryOrderController::class, 'store'])->name('deliveryorder.store');
+        //管理送貨單資料-編輯
+        Route::get('deliveryorder/{deliveryorder}/edit', [DeliveryOrderController::class, 'edit'])->name('deliveryorder.edit');
+        //管理送貨單資料-更新
+        Route::patch('deliveryorder/{editDeliveryorder}', [DeliveryOrderController::class, 'update'])->name('deliveryorder.update');
+        //管理送貨單資料-刪除
+        Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
 
     });
 

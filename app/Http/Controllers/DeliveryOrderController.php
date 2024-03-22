@@ -7,6 +7,8 @@ use App\Http\Requests\StoreDeliveryOrderRequest;
 use App\Http\Requests\UpdateDeliveryOrderRequest;
 use App\Models\Vendor;
 use App\Models\Client;
+use App\Models\DeliveryVendorDetail;
+
 
 class DeliveryOrderController extends Controller
 {
@@ -17,11 +19,11 @@ class DeliveryOrderController extends Controller
     {
         $clients = Client::all();
         $vendors = Vendor::all();
-        $deliveryorders = DeliveryOrder::with(['logistic', 'deliveryOrderStatus', 'user'])->paginate(9);
-
+        $deliveryorders = DeliveryOrder::with('logistic', 'deliveryOrderStatus', 'user', 'deliveryVendorDetail','deliveryClientDetail')->paginate(9);
         // 返回搜尋結果視圖
         return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients'));
     }
+
 
 
     public function search(Request $request)
@@ -60,7 +62,7 @@ class DeliveryOrderController extends Controller
         return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients', 'partnerType'));
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -82,7 +84,7 @@ class DeliveryOrderController extends Controller
      */
     public function show(DeliveryOrder $deliveryOrder)
     {
-        //
+    //
     }
 
     /**
@@ -104,8 +106,14 @@ class DeliveryOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeliveryOrder $deliveryOrder)
+    public function destroy(DeliveryOrder $deliveryorder)
     {
-        //
+        $deliveryorder->delete();
+
+        return redirect(route('deliveryorder.index'))->with([
+            'success' => '送貨單 [單號：'. $deliveryorder-> order_number.'] 刪除成功！',
+            'type' => 'success',
+        ]);
     }
+
 }
