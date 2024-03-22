@@ -19,7 +19,7 @@ class DriverController extends Controller
         $drivers = User::where('permission_id', 2)->paginate(9);
         //$drivers status 0:啟用 1:停用
         $drivers->map(function ($driver) {
-            $driver->status = $driver->status == 0 ? '啟用' : '停用';
+            $driver->status = $driver->status == 0 ? '正常' : '停權';
             return $driver;
         });
 
@@ -32,7 +32,7 @@ class DriverController extends Controller
         $drivers = User::where('permission_id', 2)->where('name', 'like', '%' . $search . '%')->paginate(9);
         //$drivers status 0:啟用 1:停用
         $drivers->map(function ($driver) {
-            $driver->status = $driver->status == 0 ? '啟用' : '停用';
+            $driver->status = $driver->status == 0 ? '正常' : '停權';
             return $driver;
         });
         return view('driver.index', compact('drivers'));
@@ -102,7 +102,7 @@ class DriverController extends Controller
         $drivers = User::where('permission_id', 2)->paginate(9);
         //$drivers status 0:啟用 1:停用
         $drivers->map(function ($driver) {
-            $driver->status = $driver->status == 0 ? '啟用' : '停用';
+            $driver->status = $driver->status == 0 ? '正常' : '停權';
             return $driver;
         });
         return view('driver.index', compact('drivers', 'editDriver'));

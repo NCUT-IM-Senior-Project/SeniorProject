@@ -24,6 +24,12 @@ class Client extends Model
         return $this->hasOne(RotationData::class);
     }
 
+    //輪值廠商
+    public function rotationList()
+    {
+        return $this->hasMany(RotationList::class);
+    }
+
     //聯絡人
     public function contactPerson()
     {

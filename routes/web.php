@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RotationListController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -97,6 +98,9 @@ Route::middleware('auth')->group(function () {
         Route::patch('deliveryorder/{editDeliveryorder}', [DeliveryOrderController::class, 'update'])->name('deliveryorder.update');
         //管理送貨單資料-刪除
         Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
+        //設置輪班表
+        Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
+
 
     });
 
