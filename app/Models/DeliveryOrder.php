@@ -46,15 +46,15 @@ class DeliveryOrder extends Model
     }
 
     //送貨單明細(廠商)
-    public function deliveryVendorDetails()
+    public function deliveryVendorDetail()
     {
-        return $this->hasMany(DeliveryVendorDetails::class);
+        return $this->hasOne(DeliveryVendorDetail::class, 'delivery_order_id');
     }
 
     //送貨單明細(客戶)
-    public function deliveryClientDetails()
+    public function deliveryClientDetail()
     {
-        return $this->hasMany(DeliveryClientDetails::class);
+        return $this->hasOne(DeliveryClientDetail::class, 'delivery_order_id');
     }
 
     //物流類型
