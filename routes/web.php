@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationListController;
+use App\Http\Controllers\SettingControlle;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,7 +89,8 @@ Route::middleware('auth')->group(function () {
         //設置輪班表
         Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
 
-
+        //系統設定
+        Route::get('setting', [SettingControlle::class, 'index'])->name('setting.index');
     });
 
     /* 司機才能進入的路由 */
