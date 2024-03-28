@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationListController;
@@ -83,9 +84,21 @@ Route::middleware('auth')->group(function () {
         //管理廠商資料-批次
         Route::get('vendor/batch', [VendorController::class, 'batch'])->name('vendor.batch');
         //管理廠商資料-批次下載excel範本
-     //   Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+        //   Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
         Route::get('/download-excel/{page}', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
+        //管理送貨單資料
+        Route::get('deliveryorder', [DeliveryOrderController::class, 'index'])->name('deliveryorder.index');
+        //管理送貨單資料-搜尋
+        Route::get('deliveryorder/search', [DeliveryOrderController::class, 'search'])->name('deliveryorder.search');
+        //管理送貨單資料-新增
+        Route::post('deliveryorder', [DeliveryOrderController::class, 'store'])->name('deliveryorder.store');
+        //管理送貨單資料-編輯
+        Route::get('deliveryorder/{deliveryorder}/edit', [DeliveryOrderController::class, 'edit'])->name('deliveryorder.edit');
+        //管理送貨單資料-更新
+        Route::patch('deliveryorder/{editDeliveryorder}', [DeliveryOrderController::class, 'update'])->name('deliveryorder.update');
+        //管理送貨單資料-刪除
+        Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
         //設置輪班表
         Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
 

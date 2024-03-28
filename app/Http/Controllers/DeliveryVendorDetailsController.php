@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryVendorDetails;
+use App\Models\DeliveryVendorDetail;
 use App\Http\Requests\StoreDeliveryVendorDetailsRequest;
 use App\Http\Requests\UpdateDeliveryVendorDetailsRequest;
 
@@ -35,7 +35,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeliveryVendorDetails $deliveryVendorDetails)
+    public function show(DeliveryVendorDetail $deliveryVendorDetails)
     {
         //
     }
@@ -43,7 +43,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeliveryVendorDetails $deliveryVendorDetails)
+    public function edit(DeliveryVendorDetail $deliveryVendorDetails)
     {
         //
     }
@@ -51,7 +51,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDeliveryVendorDetailsRequest $request, DeliveryVendorDetails $deliveryVendorDetails)
+    public function update(UpdateDeliveryVendorDetailsRequest $request, DeliveryVendorDetail $deliveryVendorDetails)
     {
         //
     }
@@ -59,7 +59,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeliveryVendorDetails $deliveryVendorDetails)
+    public function destroy(DeliveryVendorDetail $deliveryVendorDetails)
     {
         //
     }

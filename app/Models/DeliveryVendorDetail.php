@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DeliveryClientDetails extends Model
+class DeliveryVendorDetail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'delivery_order_id',
-        'name',
         'specification',
         'quantity',
-        'weight',
+        'main_color',
+        'work_number',
         'description',
     ];
 
     //送貨單
     public function deliveryOrder()
     {
-        return $this->belongsTo(DeliveryOrder::class);
-    }
+        return $this->belongsTo(DeliveryOrder::class);    }
 }

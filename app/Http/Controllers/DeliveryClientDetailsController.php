@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryClientDetails;
+use App\Models\DeliveryClientDetail;
 use App\Http\Requests\StoreDeliveryClientDetailsRequest;
 use App\Http\Requests\UpdateDeliveryClientDetailsRequest;
 
@@ -35,7 +35,7 @@ class DeliveryClientDetailsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeliveryClientDetails $deliveryClientDetails)
+    public function show(DeliveryClientDetail $deliveryClientDetails)
     {
         //
     }
@@ -43,7 +43,7 @@ class DeliveryClientDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeliveryClientDetails $deliveryClientDetails)
+    public function edit(DeliveryClientDetail $deliveryClientDetails)
     {
         //
     }
@@ -51,7 +51,7 @@ class DeliveryClientDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDeliveryClientDetailsRequest $request, DeliveryClientDetails $deliveryClientDetails)
+    public function update(UpdateDeliveryClientDetailsRequest $request, DeliveryClientDetail $deliveryClientDetails)
     {
         //
     }
@@ -59,7 +59,7 @@ class DeliveryClientDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeliveryClientDetails $deliveryClientDetails)
+    public function destroy(DeliveryClientDetail $deliveryClientDetails)
     {
         //
     }

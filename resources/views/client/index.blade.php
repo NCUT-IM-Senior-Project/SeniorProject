@@ -109,10 +109,10 @@
                                         <!-- 客戶資料彈出視窗 clientDate-modal- -->
                                         <div id="clientDate-modal-{{ $client->partner_id }}" class="hs-overlay hidden fixed top-0 left-0 w-full h-full z-[80] bg-gray-900 bg-opacity-50 flex justify-center items-center overflow-x-hidden overflow-y-auto">
                                             <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-                                                <div class="bg-white dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700 rounded-xl w-full max-w-md overflow-hidden">
-                                                    <div class="flex justify-between items-center py-4 px-6 border-b border-gray-200 dark:border-gray-700">
-                                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                                                            客戶帳號刪除確認
+                                                <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                                                    <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+                                                        <h3 class="font-bold text-gray-800 dark:text-white">
+                                                            客戶帳號細項
                                                         </h3>
                                                         <button type="button" class="w-8 h-8 flex justify-center items-center text-gray-800 dark:text-white hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 dark:focus:ring-gray-600 rounded-full" data-hs-overlay="#clientDate-modal-{{ $client->partner_id }}">
                                                             <span class="sr-only">Close</span>
