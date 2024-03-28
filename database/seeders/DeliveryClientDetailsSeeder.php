@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\DeliveryClientDetails;
+use App\Models\DeliveryClientDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -17,7 +17,7 @@ class DeliveryClientDetailsSeeder extends Seeder
 
         for ($i = 6; $i < 11; $i++) {
             //廠商送貨單明細
-            DeliveryClientDetails::create([
+            DeliveryClientDetail::create([
                 'delivery_order_id' => $i,
                 'name' => $faker->word,
                 'specification' => $faker->word,

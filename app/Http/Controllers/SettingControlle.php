@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryVendorDetail;
-use App\Http\Requests\StoreDeliveryVendorDetailsRequest;
-use App\Http\Requests\UpdateDeliveryVendorDetailsRequest;
+use Illuminate\Http\Request;
 
-class DeliveryVendorDetailsController extends Controller
+class SettingControlle extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('setting.index');
     }
 
     /**
@@ -27,7 +25,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDeliveryVendorDetailsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +33,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeliveryVendorDetail $deliveryVendorDetails)
+    public function show(string $id)
     {
         //
     }
@@ -43,7 +41,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DeliveryVendorDetail $deliveryVendorDetails)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +49,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDeliveryVendorDetailsRequest $request, DeliveryVendorDetail $deliveryVendorDetails)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,7 +57,7 @@ class DeliveryVendorDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeliveryVendorDetail $deliveryVendorDetails)
+    public function destroy(string $id)
     {
         //
     }

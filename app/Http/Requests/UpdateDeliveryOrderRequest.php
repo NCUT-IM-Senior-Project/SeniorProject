@@ -11,7 +11,7 @@ class UpdateDeliveryOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateDeliveryOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'keynote' => 'required|string|max:255',
+            'partner_id' => 'required|string|max:255',
+            'order_number' => 'required|string|max:255',
+            'logistics_id' => 'required|integer',
+            'scheduled_at' => 'nullable|string|max:255',
+            'shipment_at' => 'nullable|string|max:255',
+            'delivery_status_id' => 'nullable|integer',
+            'created_by' => 'nullable|integer',
         ];
     }
 }
