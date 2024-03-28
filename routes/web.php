@@ -85,9 +85,14 @@ Route::middleware('auth')->group(function () {
      //   Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
         Route::get('/download-excel/{page}', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
-        //設置輪班表
+        //新增輪值廠商
         Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
-
+        //輪值廠商-搜尋
+        Route::get('rotation/search', [RotationListController::class, 'search'])->name('rotation.search');
+        //輪值廠商-新增
+        Route::post('rotation', [RotationListController::class, 'store'])->name('rotation.store');
+        //輪值廠商-刪除
+        Route::delete('rotation/{rotationList}', [RotationListController::class, 'destroy'])->name('rotation.destroy');
 
     });
 
