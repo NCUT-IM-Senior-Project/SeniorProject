@@ -44,7 +44,9 @@ class ClientController extends Controller
 
         });
 
-        return view('client.index', compact('clients'));
+        $requirement_items = $this->create();
+
+        return view('client.index', compact('clients', 'requirement_items'));
     }
 
     /**
@@ -63,7 +65,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $requirement_items = RequirementItem::all();
+
+        return $requirement_items;
     }
 
     /**
