@@ -1,13 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreDeliveryClientDetailsRequest;
+use App\Models\DeliveryClientDetail;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\DeliveryOrder;
 use App\Http\Requests\StoreDeliveryOrderRequest;
 use App\Http\Requests\UpdateDeliveryOrderRequest;
 use App\Models\Vendor;
 use App\Models\Client;
+use App\Models\Logistic;
+
 use App\Models\DeliveryVendorDetail;
+use Illuminate\Support\Facades\Auth;
 
 
 class DeliveryOrderController extends Controller
@@ -19,11 +25,13 @@ class DeliveryOrderController extends Controller
     {
         $clients = Client::all();
         $vendors = Vendor::all();
-        $deliveryorders = DeliveryOrder::with('logistic', 'deliveryOrderStatus', 'user', 'deliveryVendorDetail','deliveryClientDetail')->paginate(9);
-        // 返回搜尋結果視圖
-        return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients'));
-    }
+        $logistics = Logistic::all();
 
+        $deliveryorders = DeliveryOrder::with('logistic', 'deliveryOrderStatus', 'user', 'deliveryVendorDetail','deliveryClientDetail')
+            ->paginate(9);
+
+        return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients', 'logistics'));
+    }
 
 
     public function search(Request $request)
@@ -37,6 +45,7 @@ class DeliveryOrderController extends Controller
         // 獲取所有客戶和廠商
         $clients = Client::all();
         $vendors = Vendor::all();
+        $logistics = Logistic::all();
 
         // 構建查詢
         $query = DeliveryOrder::query();
@@ -59,16 +68,30 @@ class DeliveryOrderController extends Controller
         $deliveryorders = $query->with('logistic', 'deliveryOrderStatus', 'user')->paginate(9);
 
         // 返回搜索結果視圖
-        return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients', 'partnerType'));
+        return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients', 'partnerType','logistics'));
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createClientOrder()
     {
-        //
+
+        // 繼續獲取其他所需的數據
+        $clients = Client::all();
+        $vendors = Vendor::all();
+        $logistics = Logistic::all();
+        $delivery_orders = DeliveryOrder::all();
+
+        return view('deliveryorder.createclientorder', compact('vendors', 'clients', 'logistics', 'delivery_orders'));
+    }
+    public function createVendorOrder()
+    {
+        $clients = Client::all();
+        $vendors = Vendor::all();
+        $logistics = Logistic::all();
+        $delivery_orders = DeliveryOrder::all();
+        return view('deliveryorder.createvendororder', compact( 'vendors', 'clients','logistics','delivery_orders'));
     }
 
     /**
@@ -76,7 +99,38 @@ class DeliveryOrderController extends Controller
      */
     public function store(StoreDeliveryOrderRequest $request)
     {
-        //
+
+        try {
+            // 獲取已驗證的數據
+            $validatedData = $request->validated();
+
+            // 在已驗證的數據中添加欄位
+            $validatedData['created_by'] = Auth::id();
+            $validatedData['delivery_status_id'] = 1;
+
+            // 創建送貨單並儲存資料
+            DeliveryOrder::create($validatedData);
+
+            // 資料保存後轉跳回廠商總表
+            return redirect(route('deliveryorder.index'))->with([
+                'success' => '送貨單新增成功！',
+                'type' => 'success',
+            ]);
+             } catch (QueryException $e) {
+            // 檢查是否是唯一性約束違規（錯誤碼 1062）
+            if ($e->errorInfo[1] == 1062) {
+                // 根據需要處理重複 order_number 的情況
+                return redirect()->back()->with([
+                    'success' => '送貨單新增失敗，該編號已經存在。',
+                    'type' => 'error',
+                ])->withErrors(['order_number' => '該 送貨單編號 已經存在']);
+            }
+            // 其他錯誤情況的處理
+            return redirect()->back()->with([
+                'error' => '送貨單新增失敗，請稍後再試。',
+                'type' => 'error',
+            ]);
+        }
     }
 
     /**
@@ -92,15 +146,27 @@ class DeliveryOrderController extends Controller
      */
     public function edit(DeliveryOrder $deliveryOrder)
     {
-        //
+        $clients = Client::all();
+        $vendors = Vendor::all();
+        $logistics = Logistic::all();
+        $delivery_orders = DeliveryOrder::all();
+        $editDeliverOrder = $deliveryOrder;
+        $deliveryorders = DeliveryOrder::paginate(9);
+        return view('deliveryorder.index', compact('deliveryorders','clients','vendors','logistics','delivery_orders', 'editDeliverOrder'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDeliveryOrderRequest $request, DeliveryOrder $deliveryOrder)
+    public function update(UpdateDeliveryOrderRequest $request, DeliveryOrder $editDeliverOrder)
     {
-        //
+
+        $editDeliverOrder -> update($request->validated());
+
+        return redirect(route('deliveryorder.index'))->with([
+            'success' => '送貨單 '. $editDeliverOrder-> order_name . ' 資料更新成功！',
+            'type' => 'success',
+        ]);
     }
 
     /**

@@ -29,7 +29,17 @@ class DeliveryVendorDetailsController extends Controller
      */
     public function store(StoreDeliveryVendorDetailsRequest $request)
     {
-        //
+        // 獲取已驗證的數據
+        $validatedData = $request->validated();
+        DeliveryVendorDetail::create($validatedData);
+
+          //dd($validatedData);
+
+        // 如果成功創建，返回成功響應或重定向到某個頁面
+        return redirect()->route('deliveryorder.index')->with([
+            'success' => '送貨單細項新增成功！',
+            'type' => 'success',
+        ]);
     }
 
     /**

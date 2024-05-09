@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DeliveryClientDetailsController;
 use App\Http\Controllers\DeliveryOrderController;
+use App\Http\Controllers\DeliveryVendorDetailsController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationListController;
@@ -83,7 +85,7 @@ Route::middleware('auth')->group(function () {
         //管理廠商資料-批次
         Route::get('vendor/batch', [VendorController::class, 'batch'])->name('vendor.batch');
         //管理廠商資料-批次下載excel範本
-        //   Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+        //Route::get('/download-excel-template', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
         Route::get('/download-excel/{page}', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
         //管理送貨單資料
@@ -98,6 +100,26 @@ Route::middleware('auth')->group(function () {
         Route::patch('deliveryorder/{editDeliveryorder}', [DeliveryOrderController::class, 'update'])->name('deliveryorder.update');
         //管理送貨單資料-刪除
         Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
+        // 管理送貨單客戶細項 - 新增
+        Route::post('/deliveryclientdetail/store', [DeliveryClientDetailsController::class, 'store'])->name('deliveryclientdetail.store');
+        // 管理送貨單廠商細項 - 新增
+        Route::post('/deliveryvendordetail/store', [DeliveryVendorDetailsController::class, 'store'])->name('deliveryvendordetail.store');
+        // 管理送貨單客戶細項 - 客戶
+        Route::get('/createclientorder', [DeliveryOrderController::class, 'createClientOrder'])->name('deliveryorder.createclientorder');
+        // 管理送貨單廠商細項 - 廠商
+        Route::get('/createvendororder', [DeliveryOrderController::class, 'createVendorOrder'])->name('deliveryorder.createvendororder');
+
+        //管理客戶送貨單細項
+        Route::get('clientorderdetail', [DeliveryClientDetailsController::class, 'index'])->name('clientorderdetail.index');
+        //管理客戶送貨單細項-搜尋
+        Route::get('clientorderdetail/search', [DeliveryClientDetailsController::class, 'search'])->name('clientorderdetail.search');
+
+
+        //管理廠商送貨單細項
+        Route::get('vendororderdetail', [DeliveryVendorDetailsController::class, 'index'])->name('vendororderdetail.index');
+        //管理廠商送貨單細項-搜尋
+        Route::get('vendororderdetail/search', [DeliveryVendorDetailsController::class, 'search'])->name('vendororderdetail.search');
+
         //設置輪班表
         Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
 

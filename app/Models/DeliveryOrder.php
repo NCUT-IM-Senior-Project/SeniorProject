@@ -18,8 +18,16 @@ class DeliveryOrder extends Model
         'shipment_at',
         'delivery_status_id',
         'created_by',
+        'status',
     ];
+// 避免預設日期時間戳
+    public $timestamps = false;
 
+    // 定義日期時間欄位
+    protected $dates = [
+        'scheduled_at',
+        'shipment_at',
+    ];
     //使用者
     public function user()
     {
@@ -36,13 +44,6 @@ class DeliveryOrder extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
-    }
-
-    // 廠商或客戶
-    public function partner()
-    {
-        return $this->belongsTo('App\Models\Vendor', 'partner_id', 'id')
-            ->orWhere('App\Models\Client', 'partner_id', 'id');
     }
 
     //送貨單明細(廠商)
