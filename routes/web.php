@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RotationDataController;
 use App\Http\Controllers\RotationListController;
 use App\Http\Controllers\SettingControlle;
 use App\Http\Controllers\VendorController;
@@ -91,13 +92,19 @@ Route::middleware('auth')->group(function () {
                 Route::get('/download-excel/{page}', [VendorController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
                 //新增輪值廠商
-                Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
+                Route::get('rotationList', [RotationListController::class, 'index'])->name('rotationlist.index');
                 //輪值廠商-搜尋
-                Route::get('rotation/search', [RotationListController::class, 'search'])->name('rotation.search');
+                Route::get('rotationList/search', [RotationListController::class, 'search'])->name('rotationlist.search');
                 //輪值廠商-新增
-                Route::post('rotation', [RotationListController::class, 'store'])->name('rotation.store');
+                Route::post('rotationList', [RotationListController::class, 'store'])->name('rotationlist.store');
                 //輪值廠商-刪除
-                Route::delete('rotation/{rotationList}', [RotationListController::class, 'destroy'])->name('rotation.destroy');
+                Route::delete('rotationList/{rotationList}', [RotationListController::class, 'destroy'])->name('rotationlist.destroy');
+
+                //輪值資料
+                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationdata.index');
+                //輪值資料-新增
+                Route::post('rotationdata', [RotationDataController::class, 'store'])->name('rotationdata.store');
+
 
                 //管理送貨單資料
                 Route::get('deliveryorder', [DeliveryOrderController::class, 'index'])->name('deliveryorder.index');

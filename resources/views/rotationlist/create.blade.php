@@ -2,7 +2,7 @@
 <p class="transition duration-1000 text-gray-600 text-sm dark:text-gray-200">新增輪值廠商資料</p>
 <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
     <div class="mx-auto max-w-full px-4 py-4 sm:px-6 sm:py-4 lg:px-8">
-        <form action="{{ route('rotation.store') }}" method="POST" role="form">
+        <form action="{{ route('rotationlist.store') }}" method="POST" role="form">
             @csrf
             @method('POST')
             <div class="grid grid-cols-4 grid-rows-2 gap-2">
