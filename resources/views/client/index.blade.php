@@ -1,15 +1,15 @@
 @extends('layouts.app')
 @section('title', '管理客戶資料')
 
-{{--@section('page-form')--}}
-{{--    <!-- 判斷是否有進入編輯表單路由 -->--}}
-{{--    @if(isset($editClient))--}}
-{{--        @include('client.edit', compact('editClient'))--}}
-{{--    @else--}}
-{{--        @include('client.create')--}}
-{{--    @endif--}}
+@section('page-form')
+    <!-- 判斷是否有進入編輯表單路由 -->
+    @if(isset($editClient))
+        @include('client.edit', compact('editClient'))
+    @else
+        @include('client.create', compact('requirement_items'))
+    @endif
 
-{{--@endsection--}}
+@endsection
 
 @section('page-content')
 
@@ -107,37 +107,39 @@
                                         <!-- End 刪除客戶資料彈出視窗 -->
 
                                         <!-- 客戶資料彈出視窗 clientDate-modal- -->
-                                        <div id="clientDate-modal-{{ $client->partner_id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
+                                        <div id="clientDate-modal-{{ $client->partner_id }}" class="hs-overlay hidden fixed top-0 left-0 w-full h-full z-[80] bg-gray-900 bg-opacity-50 flex justify-center items-center overflow-x-hidden overflow-y-auto">
                                             <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
                                                 <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
                                                     <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
                                                         <h3 class="font-bold text-gray-800 dark:text-white">
                                                             客戶帳號細項
                                                         </h3>
-                                                        <button type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#clientDate-modal-{{ $client -> partner_id }}">
+                                                        <button type="button" class="w-8 h-8 flex justify-center items-center text-gray-800 dark:text-white hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 dark:focus:ring-gray-600 rounded-full" data-hs-overlay="#clientDate-modal-{{ $client->partner_id }}">
                                                             <span class="sr-only">Close</span>
-                                                            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                                                            </svg>
                                                         </button>
                                                     </div>
-                                                    <div class="p-4 overflow-y-auto h-auto">
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">客戶編號：{{ $client->partner_id }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">公司名稱：{{ $client->name }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">地址：{{ $client->address }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">市話：{{ $client->land_line }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">傳真：{{ $client->fax }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">備註：{{ $client->description }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">特殊需求：{{ $client->requirementItems }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">聯絡人：{{ $client->contactPeopleName }}</p>
-                                                        <p class="text-gray-800 dark:text-gray-200 font-bold">聯絡人手機：{{ $client->contactPeoplePhone }}</p>
+                                                    <div class="p-6">
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">客戶編號：{{ $client->partner_id }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">公司名稱：{{ $client->name }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">地址：{{ $client->address }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">市話：{{ $client->land_line }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">傳真：{{ $client->fax }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">備註：{{ $client->description }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">特殊需求：{{ $client->requirementItems }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">聯絡人：{{ $client->contactPeopleName }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">聯絡人手機：{{ $client->contactPeoplePhone }}</p>
                                                     </div>
-                                                    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
-                                                        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#clientDate-modal-{{ $client -> partner_id }}">
+                                                    <div class="flex justify-end items-center py-4 px-6 border-t border-gray-200 dark:border-gray-700">
+                                                        <button type="button" class="px-4 py-2 text-sm font-semibold text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 dark:bg-slate-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800 dark:focus:ring-dark dark:focus:ring-gray-600" data-hs-overlay="#clientDate-modal-{{ $client->partner_id }}">
                                                             關 閉
                                                         </button>
                                                         <form action="{{ route('client.edit', $client) }}" method="POST">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                            <button type="submit" class="px-4 py-2 ml-2 text-sm font-semibold text-white bg-blue-600 border border-transparent rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring focus:ring-gray-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-dark dark:focus:ring-gray-600">
                                                                 編 輯
                                                             </button>
                                                         </form>
@@ -146,6 +148,7 @@
                                             </div>
                                         </div>
                                         <!-- End 客戶資料彈出視窗 -->
+
 
                                     @endforeach
                                     <!-- 填充表身高度 -->
