@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '管理廠商資料')
+@section('title', '批次匯入廠商資料')
 
 @section('page-form')
     <!-- 判斷是否有進入編輯表單路由 -->
@@ -11,10 +11,10 @@
 
 @section('page-content')
     @php
-        $currentPage = 'vendorexcel'; // 用實際的頁面標識替換 'your_value_here'
+        $currentPage = 'vendorexcel'; // 用實際的頁面標識替換
     @endphp
     @include('components.uploadexcel', ['currentPage' => $currentPage])
-     
+
     <div class="flex sm:justify-end items-end space-x-2 sm:col-start-4 sm:row-start-2 col-span-4 row-start-6 ">
         <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
             批次匯入
