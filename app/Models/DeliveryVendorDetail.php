@@ -16,6 +16,8 @@ class DeliveryVendorDetail extends Model
         'main_color',
         'work_number',
         'description',
+        'status',
+
     ];
 
     //送貨單

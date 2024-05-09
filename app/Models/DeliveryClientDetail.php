@@ -16,6 +16,7 @@ class DeliveryClientDetail extends Model
         'quantity',
         'weight',
         'description',
+        'status',
     ];
 
     //送貨單
