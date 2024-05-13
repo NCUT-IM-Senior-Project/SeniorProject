@@ -44,10 +44,6 @@ class VendorController extends Controller
             // 獲取已驗證的數據
             $validatedData = $request->validated();
 
-            // 在已驗證的數據中添加欄位
-            $validatedData['status'] = 0;
-            $validatedData['permission_id'] = 2;
-
             // 驗證成功
             Vendor::create($validatedData);
 
@@ -59,15 +55,15 @@ class VendorController extends Controller
         } catch (QueryException $e) {
             // 檢查是否是唯一性約束違規（錯誤碼 1062）
             if ($e->errorInfo[1] == 1062) {
-                // 根據需要處理重複 partner_id 的情況
+                // 處理重複 partner_id 的情況
                 return redirect()->back()->with([
-                    'success' => '廠商新增失敗，該 編號 已經存在。',
+                    'error' => '廠商新增失敗，該編號已經存在。',
                     'type' => 'error',
-                ])->withErrors(['partner_id' => '該 廠商編號 已經存在']);
+                ])->withErrors(['partner_id' => '該廠商編號已經存在']);
             }
             // 其他錯誤情況的處理
             return redirect()->back()->with([
-                'error' => '廠商帳號新增失敗，請稍後再試。',
+                'error' => '廠商新增失敗，請稍後再試。',
                 'type' => 'error',
             ]);
         }

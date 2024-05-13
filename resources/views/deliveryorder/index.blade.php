@@ -1,12 +1,22 @@
 @extends('layouts.app')
-@section('title', '管理送貨單')
+@section('title', '管理廠商資料')
 
+@section('page-form')
+    <!-- 判斷是否有進入編輯表單路由 -->
+    @if(isset($editDeliveryOrder))
+        @include('deliveryorder.edit', compact('editDeliveryOrder'))
+    @else
+        @include('deliveryorder.create')
+    @endif
+
+@endsection
 
 @section('page-content')
+
     <!-- 廠商資訊總覽 -->
     <p class="text-gray-600 text-sm dark:text-gray-200">送貨單總覽</p>
     <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-        <div class="mx-auto max-w-full px-2 py-4 sm:px-2 sm:py-8 lg:px-8">
+        <div class="mx-auto max-w-auto px-2 py-4 sm:px-2 sm:py-8 lg:px-8">
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto ">
                     <div class="p-1 min-w-full inline-block align-middle ">
@@ -53,9 +63,10 @@
                                     <button type="submit" name="search_type" value="partner" class="py-2 px-3 ml-2 flex items-center gap-x-3 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                         <span>按廠商/客戶搜索</span>
                                     </button>
-                             </div>
+                                </div>
                              </form>
                     </div>
+
                             <div class="overflow-hidden overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                     <thead class="bg-gray-50 dark:bg-gray-700">
@@ -135,9 +146,9 @@
                                                         <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteDeliveryorder-modal-{{ $deliveryorder -> deliveryorder_id }}">
                                                             取 消
                                                         </button>
-                                                        <form action="{{ route('deliveryorder.destroy', $deliveryorder) }}" method="POST">
+                                                        <form action="{{ route('deliveryorder.update', $deliveryorder) }}" method="POST">
                                                             @csrf
-                                                            @method('delete')
+                                                            @method('patch')
                                                             <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                                                 確認刪除
                                                             </button>
@@ -162,7 +173,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="p-4 overflow-y-auto h-auto">
-                                                            <p class="text-gray-800 dark:text-gray-200 font-bold">送貨單編號：{{ $deliveryorder->id }}</p>
+                                                            <p class="text-gray-800 dark:text-gray-200 font-bold">送貨單編號：{{ $deliveryorder->order_number }}</p>
                                                             @if($deliveryorder->deliveryVendorDetail)
                                                                 <p class="text-gray-800 dark:text-gray-200 font-bold">規格：{{ $deliveryorder->deliveryVendorDetail->specification }}</p>
                                                                 <p class="text-gray-800 dark:text-gray-200 font-bold">數量：{{ $deliveryorder->deliveryVendorDetail->quantity }}</p>
@@ -178,7 +189,7 @@
                                                                 <p class="text-gray-800 dark:text-gray-200 font-bold">備註：{{ $deliveryorder->deliveryClientDetail->description }}</p>
 
                                                                 @else
-                                                                <p class="text-gray-800 dark:text-gray-200">没有相關資料。</p>
+                                                                <p class="text-gray-800 dark:text-gray-200">沒有相關資料。</p>
                                                             @endif
                                                         </div>
                                                         <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
@@ -256,6 +267,14 @@
                         </div>
                     </div>
                 </div>
+            <div class="flex justify-end">
+                <a href="{{ route('deliveryorder.createclientorder') }}" class="py-2 px-3 ml-2 flex items-center gap-x-3 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                    新增客戶送貨單
+                </a>
+                <a href="{{ route('deliveryorder.createvendororder') }}" class="py-2 px-3 ml-2 flex items-center gap-x-3 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                    新增廠商送貨單
+                </a>
+            </div>
             </div>
         </div>
 
