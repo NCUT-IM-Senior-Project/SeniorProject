@@ -26,7 +26,7 @@ class RotationListController extends Controller
 
         $clients = $this->create();
 
-        return view('rotation.index', compact('rotationLists', 'clients'));
+        return view('rotationlist.index', compact('rotationLists', 'clients'));
 
     }
 
@@ -47,7 +47,7 @@ class RotationListController extends Controller
 
         $clients = $this->create();
 
-        return view('rotation.index', compact('rotationLists', 'clients'));
+        return view('rotationlist.index', compact('rotationLists', 'clients'));
     }
 
     /**
@@ -78,7 +78,7 @@ class RotationListController extends Controller
         $rotationList->save();
 
         // 重定向到目標頁面，並返回成功消息
-        return redirect(route('rotation.index'))->with([
+        return redirect(route('rotationlist.index'))->with([
             'success' => '廠商新增成功！',
             'type' => 'success',
         ]);
@@ -116,7 +116,7 @@ class RotationListController extends Controller
     {
         $rotationList->delete();
 
-        return redirect(route('rotation.index'))->with([
+        return redirect(route('rotationlist.index'))->with([
             'success' => '廠商 [編號：'. $rotationList -> partner_id.'] 刪除成功！',
             'type' => 'success',
         ]);

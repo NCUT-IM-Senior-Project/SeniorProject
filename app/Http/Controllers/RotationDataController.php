@@ -13,7 +13,7 @@ class RotationDataController extends Controller
      */
     public function index()
     {
-        //
+        return view('rotationData.index');
     }
 
     /**

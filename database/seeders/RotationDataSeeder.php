@@ -24,8 +24,8 @@ class RotationDataSeeder extends Seeder
                 RotationData::create([
                     'rotation_list_id' => $rotationList->id,
                     'driver_id' => $faker->randomElement($driverIds),
-                    'date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 1 week'),
-
+                    'start_at' => $faker->dateTimeBetween('now', $endDate = '+ 1 days'),
+                    'end_at' => $faker->dateTimeBetween('now', $endDate = '+ 3 days'),
                 ]);
             }
         }
