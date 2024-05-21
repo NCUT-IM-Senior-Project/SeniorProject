@@ -5,6 +5,7 @@ use App\Http\Controllers\DeliveryClientDetailsController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DeliveryVendorDetailsController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\KeyNoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationDataController;
 use App\Http\Controllers\RotationListController;
@@ -173,6 +174,13 @@ Route::middleware('auth')->group(function () {
                 Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
                 //設置輪班表
                 Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
+
+                //注意事項
+                Route::get('Keynote', [KeyNoteController::class, 'index'])->name('keynote.index');
+                //注意事項-編輯
+                Route::get('Keynote/{keyNote}/edit', [KeyNoteController::class, 'edit'])->name('keynote.edit');
+                //注意事項-更新
+                Route::patch('Keynote/{keyNote}', [KeyNoteController::class, 'update'])->name('keynote.update');
 
                 //系統設定
                 Route::get('setting', [SettingControlle::class, 'index'])->name('setting.index');
