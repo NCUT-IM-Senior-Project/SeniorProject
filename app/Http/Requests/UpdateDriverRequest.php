@@ -27,6 +27,7 @@ class UpdateDriverRequest extends FormRequest
             'email' => 'required|string|max:255',
             'password' => 'required|string|max:255',
             'description' => 'string|max:255',
+            'status' => 'in:0,1',
         ];
     }
 }

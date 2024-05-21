@@ -38,10 +38,9 @@
 
                 <div class="row-start-2 col-span-4 sm:col-span-1">
                     <div class="relative">
-                        <label for="password" class="block text-sm font-medium mb-2 dark:text-white">帳號狀態</label>
-
                         <div class="relative">
-                            <select data-hs-select='{
+                            <label for="status" class="block text-sm font-medium mb-2 dark:text-white">帳號狀態</label>
+                            <select name='status' id="status" data-hs-select='{
                               "placeholder": "Select option...",
                               "toggleTag": "<button type=\"button\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-gray-200\" data-title></span></button>",
                               "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 px-4 pe-9 flex items-center text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
