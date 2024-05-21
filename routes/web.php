@@ -172,9 +172,9 @@ Route::middleware('auth')->group(function () {
                 Route::delete('rotationList/{rotationList}', [RotationListController::class, 'destroy'])->name('rotationlist.destroy');
 
                 //輪值資料
-                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationdata.index');
+                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationData.index');
                 //輪值資料-新增
-                Route::post('rotationdata', [RotationDataController::class, 'store'])->name('rotationdata.store');
+                Route::post('rotationdata', [RotationDataController::class, 'store'])->name('rotationData.store');
 
 
                 //管理送貨單資料
