@@ -173,9 +173,10 @@ Route::middleware('auth')->group(function () {
 
                 //輪值資料
                 Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationData.index');
+                //輪值資料
+                Route::get('rotationdata/{vendorClientId}', [RotationDataController::class, 'getRotations']);
                 //輪值資料-新增
-                Route::post('rotationdata', [RotationDataController::class, 'store'])->name('rotationData.store');
-
+                Route::post('rotationdata', [RotationDataController::class, 'storeRotation']);
 
                 //管理送貨單資料
                 Route::get('deliveryorder', [DeliveryOrderController::class, 'index'])->name('deliveryorder.index');
