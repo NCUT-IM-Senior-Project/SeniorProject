@@ -1,4 +1,3 @@
-@section('title', '新增客戶送貨單')
         <p class="transition duration-1000 text-gray-600 text-sm dark:text-gray-200">新增送貨單資訊</p>
         <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
             <div class="mx-auto max-w-auto px-2 py-4 sm:px-2 sm:py-8 lg:px-8 ">
@@ -8,7 +7,6 @@
                     @method('POST')
                     @csrf
                     <div class="grid grid-cols-6 grid-rows-2 gap-1">
-
                         <div class="col-span-5 sm:col-span-2 ">
                             <div class="col-span-4 sm:col-span-1 ">
                                 <label for="keynote" class="block text-sm font-medium mb-2 dark:text-white">主旨</label>
@@ -24,7 +22,7 @@
                                 <label for="partner_id" class="block text-sm font-medium mb-2 dark:text-white">選擇客戶</label>
                                 <div class="mt-2">
                                     <div class="relative">
-                                        <select  data-hs-select='{
+                                        <select  id="partner_id" name="partner_id" data-hs-select='{
                                     "hasSearch": true,
                                     "searchPlaceholder": "授尋客戶ID...",
                                      "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3",
@@ -35,7 +33,7 @@
                                       "dropdownClasses": "mt-2 max-h-[300px] pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-slate-900 dark:border-gray-700",
                                       "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-200 dark:focus:bg-slate-800",
                                      "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>"
-                                         }'value="{{ old('partner_id') }}"  class="hidden" id="partner_id" name="partner_id">
+                                         }'value="{{ old('partner_id') }}"  class="hidden" >
                                             <option value="">Choose</option>
                                             @foreach($clients as $client)
                                                 <option value="{{ $client->partner_id }}">客戶{{ $client->partner_id }} | {{ $client->name }}</option>
@@ -67,7 +65,7 @@
                                 <label for="logistics_id" class="block text-sm font-medium mb-2 dark:text-white">物流類型</label>
                                 <div class="col-span-4 sm:col-span-5 ">
                                     <div class="relative">
-                                        <select  data-hs-select='{
+                                        <select id="logistics_id" name="logistics_id" data-hs-select='{
                                   "hasSearch": true,
                                   "searchPlaceholder": "授尋物流類型...",
                                   "searchClasses": "block w-50 text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3",
@@ -79,7 +77,7 @@
                                   "optionClasses": "py-2 px-4 w-50 text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-200 dark:focus:bg-slate-800",
                                   "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>"
                                   }' class="block w-50 text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3"
-                                                 value="{{ old('logistics_id') }}"  class="hidden" id="logistics_id" name="logistics_id">>
+                                                 value="{{ old('logistics_id') }}"  class="hidden"  >>
                                             <option value="">選擇物流類型</option>
                                             @foreach($logistics as $logistic)
                                                 <option value="{{ $logistic->id }}">{{ $logistic->name }}</option>
@@ -106,14 +104,14 @@
                                 @enderror
                             </div>
                         </div>
-
+<!-----
                         <div class="col-span-5 sm:col-span-2">
                             <div class="col-span-4 sm:col-span-1">
                                 <label for="created_by" class="block text-sm font-medium mb-2 dark:text-white">創建者</label>
                                 <input type="text" id="created_by" name="created_by" class="py-3 px-4 block w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" value="{{ auth()->user()->name }}" readonly>
                             </div>
                         </div>
-
+----->
                         <div class="col-span-5 sm:col-span-2">
                             <div class="row-start-2 col-span-4 sm:col-span-2">
                                 <label for="shipment_at" class="block text-sm font-medium mb-2 dark:text-white">出貨日期</label>

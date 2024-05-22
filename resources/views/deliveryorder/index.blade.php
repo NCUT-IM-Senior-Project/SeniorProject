@@ -1,14 +1,13 @@
 @extends('layouts.app')
-@section('title', '管理廠商資料')
+@section('title', '管理送貨單資料')
 
 @section('page-form')
     <!-- 判斷是否有進入編輯表單路由 -->
-    @if(isset($editDeliveryOrder))
-        @include('deliveryorder.edit', compact('editDeliveryOrder'))
+    @if(isset($deliveryOrder))
+        @include('deliveryorder.edit', compact('deliveryOrder'))
     @else
         @include('deliveryorder.create')
     @endif
-
 @endsection
 
 @section('page-content')
@@ -117,7 +116,7 @@
                                                     <span class="mx-2">|</span>
                                                     <a href="{{ route('deliveryorder.edit', $deliveryorder) }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">編輯</a>
                                                     <span class="mx-2">|</span>
-                                                    <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteDeliveryorder-modal-{{ $deliveryorder -> deliveryorder_id }}">
+                                                    <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteDeliveryorder-modal-{{ $deliveryorder -> id }}">
                                                         刪除
                                                     </button>
                                                 </div>
@@ -125,7 +124,7 @@
                                         </tr>
 
                                         <!-- 刪除送貨單資料彈出視窗 -->
-                                        <div id="deleteDeliveryorder-modal-{{ $deliveryorder -> deliveryorder_id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
+                                        <div id="deleteDeliveryorder-modal-{{ $deliveryorder -> id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
                                             <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
                                                 <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
                                                     <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
@@ -143,12 +142,12 @@
                                                         </p>
                                                     </div>
                                                     <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
-                                                        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteDeliveryorder-modal-{{ $deliveryorder -> deliveryorder_id }}">
+                                                        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteDeliveryorder-modal-{{ $deliveryorder -> id }}">
                                                             取 消
                                                         </button>
-                                                        <form action="{{ route('deliveryorder.update', $deliveryorder) }}" method="POST">
+                                                        <form action="{{ route('deliveryorder.destroy', $deliveryorder) }}" method="POST">
                                                             @csrf
-                                                            @method('patch')
+                                                            @method('delete')
                                                             <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                                                 確認刪除
                                                             </button>

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DeliveryOrder extends Model
 {
     use HasFactory;
-
+    use SoftDeletes;
     protected $fillable = [
         'keynote',
         'partner_id',
@@ -18,7 +19,6 @@ class DeliveryOrder extends Model
         'shipment_at',
         'delivery_status_id',
         'created_by',
-        'status',
     ];
 // 避免預設日期時間戳
     public $timestamps = false;
