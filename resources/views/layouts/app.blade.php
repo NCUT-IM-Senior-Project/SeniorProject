@@ -8,6 +8,7 @@
     <title>@yield('title') | 派遣管理後台</title>
 
     <!-- css, js -->
+    @yield('styles')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50 dark:bg-slate-900">

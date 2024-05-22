@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
-    use HasFactory;
-    // 關閉自動更新時間戳記
-    public $timestamps = false;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
 
     protected $fillable = [
         'number',
@@ -25,7 +27,7 @@ class Car extends Model
     //使用者
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'driver_id');
     }
 
     //配送單

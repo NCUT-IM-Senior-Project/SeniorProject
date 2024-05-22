@@ -16,7 +16,7 @@ class RotationList extends Model
     //輪值資料
     public function rotationData()
     {
-        return $this->hasMany(RotationData::class);
+        return $this->hasMany(RotationData::class, 'rotation_list_id');
     }
 
     //客戶
@@ -28,6 +28,6 @@ class RotationList extends Model
     //廠商
     public function vendor()
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(Vendor::class, 'partner_id', 'partner_id');
     }
 }

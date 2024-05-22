@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DeliveryClientDetailsController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DeliveryVendorDetailsController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\KeyNoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationDataController;
 use App\Http\Controllers\RotationListController;
@@ -56,6 +58,22 @@ Route::middleware('auth')->group(function () {
                 //管理司機資料-批次下載excel範本
                 Route::get('/download-excel-template', [DriverController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
+                //管理車輛資料
+                Route::get('car', [CarController::class, 'index'])->name('car.index');
+                //管理車輛資料-搜尋
+                Route::get('car/search', [CarController::class, 'search'])->name('car.search');
+                //管理車輛資料-新增
+                Route::post('car', [CarController::class, 'store'])->name('car.store');
+                //管理車輛資料-編輯
+                Route::get('car/{car}/edit', [CarController::class, 'edit'])->name('car.edit');
+                //管理車輛資料-更新
+                Route::patch('car/{editCar}', [CarController::class, 'update'])->name('car.update');
+                //管理車輛資料-刪除
+                Route::delete('car/{car}', [CarController::class, 'destroy'])->name('car.destroy');
+                //管理車輛資料-批次
+                Route::get('car/batch', [CarController::class, 'batch'])->name('car.batch');
+                //管理車輛資料-批次下載excel範本
+                Route::get('/download-excel-template', [CarController::class, 'downloadExcelTemplate'])->name('download-excel-template');
 
                 //管理客戶資料
                 Route::get('client', [ClientController::class, 'index'])->name('client.index');
@@ -154,10 +172,11 @@ Route::middleware('auth')->group(function () {
                 Route::delete('rotationList/{rotationList}', [RotationListController::class, 'destroy'])->name('rotationlist.destroy');
 
                 //輪值資料
-                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationdata.index');
+                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationData.index');
+                //輪值資料
+                Route::get('rotationdata/{vendorClientId}', [RotationDataController::class, 'getRotations']);
                 //輪值資料-新增
-                Route::post('rotationdata', [RotationDataController::class, 'store'])->name('rotationdata.store');
-
+                Route::post('rotationdata', [RotationDataController::class, 'storeRotation']);
 
                 //管理送貨單資料
                 Route::get('deliveryorder', [DeliveryOrderController::class, 'index'])->name('deliveryorder.index');
@@ -173,6 +192,13 @@ Route::middleware('auth')->group(function () {
                 Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
                 //設置輪班表
                 Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
+
+                //注意事項
+                Route::get('Keynote', [KeyNoteController::class, 'index'])->name('keynote.index');
+                //注意事項-編輯
+                Route::get('Keynote/{keyNote}/edit', [KeyNoteController::class, 'edit'])->name('keynote.edit');
+                //注意事項-更新
+                Route::patch('Keynote/{keyNote}', [KeyNoteController::class, 'update'])->name('keynote.update');
 
                 //系統設定
                 Route::get('setting', [SettingControlle::class, 'index'])->name('setting.index');
