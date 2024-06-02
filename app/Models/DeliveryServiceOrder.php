@@ -22,7 +22,7 @@ class DeliveryServiceOrder extends Model
     //使用者
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'driver_id');
     }
 
     //配送排程明細
@@ -34,7 +34,7 @@ class DeliveryServiceOrder extends Model
     //排程狀態
     public function planStatus()
     {
-        return $this->belongsTo(PlanStatus::class);
+        return $this->belongsTo(PlanStatus::class, 'plan_id');
     }
 
     //車輛
