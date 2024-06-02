@@ -12,7 +12,8 @@ class RotationData extends Model
     protected $fillable = [
         'rotation_list_id',
         'driver_id',
-        'date',
+        'start_at',
+        'end_at',
     ];
 
     //使用者
@@ -24,6 +25,6 @@ class RotationData extends Model
     //輪值名單
     public function rotationList()
     {
-        return $this->belongsTo(RotationList::class);
+        return $this->belongsTo(RotationList::class, 'rotation_list_id');
     }
 }

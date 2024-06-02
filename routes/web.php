@@ -7,6 +7,7 @@ use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DeliveryServiceOrderController;
 use App\Http\Controllers\DeliveryVendorDetailsController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\KeyNoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationDataController;
 use App\Http\Controllers\RotationListController;
@@ -171,9 +172,12 @@ Route::middleware('auth')->group(function () {
                 Route::delete('rotationList/{rotationList}', [RotationListController::class, 'destroy'])->name('rotationlist.destroy');
 
                 //輪值資料
-                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationdata.index');
+                Route::get('rotationdata', [RotationDataController::class, 'index'])->name('rotationData.index');
+                //輪值資料
+                Route::get('rotationdata/{vendorClientId}', [RotationDataController::class, 'getRotations']);
                 //輪值資料-新增
-                Route::post('rotationdata', [RotationDataController::class, 'store'])->name('rotationdata.store');
+                Route::post('rotationdata', [RotationDataController::class, 'storeRotation']);
+
 
                 //管理送貨單資料
                 Route::get('deliveryorder', [DeliveryOrderController::class, 'index'])->name('deliveryorder.index');
@@ -190,6 +194,7 @@ Route::middleware('auth')->group(function () {
                 //設置輪班表
                 Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
 
+
                 //管理配送單資料
                 Route::get('deliveryserviceorder', [DeliveryServiceOrderController::class, 'index'])->name('deliveryserviceorder.index');
                 //管理配貨單資料-搜尋
@@ -204,6 +209,13 @@ Route::middleware('auth')->group(function () {
                 Route::patch('deliveryserviceorder/{editDeliveryserviceorder}', [DeliveryServiceOrderController::class, 'update'])->name('deliveryserviceorder.update');
                 //管理配貨單資料-刪除
                 Route::delete('deliveryserviceorder/{deliveryserviceorder}', [DeliveryServiceOrderController::class, 'destroy'])->name('deliveryserviceorder.destroy');
+                //注意事項
+                Route::get('Keynote', [KeyNoteController::class, 'index'])->name('keynote.index');
+                //注意事項-編輯
+                Route::get('Keynote/{keyNote}/edit', [KeyNoteController::class, 'edit'])->name('keynote.edit');
+                //注意事項-更新
+                Route::patch('Keynote/{keyNote}', [KeyNoteController::class, 'update'])->name('keynote.update');
+
 
                 //系統設定
                 Route::get('setting', [SettingControlle::class, 'index'])->name('setting.index');

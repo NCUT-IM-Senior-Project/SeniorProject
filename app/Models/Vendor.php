@@ -24,6 +24,12 @@ class Vendor extends Model
         return $this->hasOne(RotationData::class);
     }
 
+    //輪值名單
+    public function rotationLists()
+    {
+        return $this->hasMany(RotationList::class);
+    }
+
     //聯絡人
     public function contactPerson()
     {
