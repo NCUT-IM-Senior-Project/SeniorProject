@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeliveryClientDetailsController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DeliveryVendorDetailsController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KeyNoteController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationDataController;
 use App\Http\Controllers\RotationListController;
@@ -29,11 +31,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
         //儀表板-首頁 dashboard
-        Route::get('/', function () {
-                return view('dashboard');
-        });
+    Route::get('/', [DashboardController::class, 'dashBoardQuickInformation'])->name('dashboard');
 
-        //個人檔案 Profile
+
+    //個人檔案 Profile
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -192,6 +193,9 @@ Route::middleware('auth')->group(function () {
                 Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
                 //設置輪班表
                 Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
+
+                //排程資料
+                Route::get('plan', [PlanController::class, 'index'])->name('plan.index');
 
                 //注意事項
                 Route::get('Keynote', [KeyNoteController::class, 'index'])->name('keynote.index');
