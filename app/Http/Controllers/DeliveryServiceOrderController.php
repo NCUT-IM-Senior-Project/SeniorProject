@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Client;
 use App\Models\DeliveryOrder;
 use App\Models\DeliveryPlanDetails;
 use App\Models\DeliveryServiceOrder;
 use App\Http\Requests\StoreDeliveryServiceOrderRequest;
 use App\Http\Requests\UpdateDeliveryServiceOrderRequest;
+use App\Models\Logistic;
 use App\Models\User;
+use App\Models\Vendor;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DeliveryServiceOrderController extends Controller
@@ -36,10 +40,51 @@ class DeliveryServiceOrderController extends Controller
      */
     public function index()
     {
+        $deliveryserviceorders = $this->deliveryServiceOrders();
+        $deliveryorders = DeliveryOrder::all();
 
+        return view('deliveryserviceorder.index', compact('deliveryserviceorders', 'deliveryorders'));
+    }
+
+    public function route()
+    {
         $deliveryserviceorders = $this->deliveryServiceOrders();
 
-        return view('deliveryserviceorder.index', compact('deliveryserviceorders'));
+        return view('route.index', compact('deliveryserviceorders'));
+    }
+
+    public function routeSearch(Request $request)
+    {
+        $users = User::all();
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $driverName = $request->input('driver_name');
+
+        // 構建查詢
+        $query = DeliveryServiceOrder::query();
+
+        // 根據日期範圍進行搜索
+        if ($startDate && $endDate) {
+            $query->whereBetween('departure_at', [$startDate, $endDate]);
+        }
+
+        if ($driverName) {
+            // 获取 driver_id 对应的用户
+            $driver = User::where('name', $driverName)->where('permission_id', 2)->first();
+            if ($driver) {
+                $query->where('driver_id', $driver->id);
+            }
+        }
+
+        $deliveryserviceorders = $query->with('user')->paginate(9);
+
+        // 格式化日期
+        $deliveryserviceorders->each(function($deliveryserviceorder) {
+            $deliveryserviceorder->departure_at = Carbon::parse($deliveryserviceorder->departure_at)->format('Y-m-d');
+        });
+
+        return view('route.index', compact('deliveryserviceorders', 'users'));
     }
 
     /**

@@ -216,6 +216,10 @@ Route::middleware('auth')->group(function () {
                 //注意事項-更新
                 Route::patch('Keynote/{keyNote}', [KeyNoteController::class, 'update'])->name('keynote.update');
 
+                //排程單總覽
+                Route::get('route', [DeliveryServiceOrderController::class, 'route'])->name('route.index');
+                //排程單總覽-搜尋
+                Route::get('route/search', [DeliveryServiceOrderController::class, 'routeSearch'])->name('route.search');
 
                 //系統設定
                 Route::get('setting', [SettingControlle::class, 'index'])->name('setting.index');

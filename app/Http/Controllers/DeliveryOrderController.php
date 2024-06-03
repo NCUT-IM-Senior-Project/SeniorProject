@@ -31,7 +31,6 @@ class DeliveryOrderController extends Controller
         $logistics = Logistic::all();
 
         $deliveryorders = DeliveryOrder::with('logistic', 'deliveryOrderStatus', 'user', 'deliveryVendorDetail','deliveryClientDetail')
-            ->where('status', '!=', 1) // 只選擇狀態不為1的送貨單
             ->paginate(9);
 
         return view('deliveryorder.index', compact('deliveryorders', 'vendors', 'clients', 'logistics'));
