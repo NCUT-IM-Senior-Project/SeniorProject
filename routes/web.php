@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeliveryClientDetailsController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\DeliveryServiceOrderController;
 use App\Http\Controllers\DeliveryVendorDetailsController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KeyNoteController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RotationDataController;
 use App\Http\Controllers\RotationListController;
@@ -30,11 +32,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
         //儀表板-首頁 dashboard
-        Route::get('/', function () {
-                return view('dashboard');
-        });
+    Route::get('/', [DashboardController::class, 'dashBoardQuickInformation'])->name('dashboard');
 
-        //個人檔案 Profile
+
+    //個人檔案 Profile
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -92,7 +93,6 @@ Route::middleware('auth')->group(function () {
                 Route::get('client/batch', [ClientController::class, 'batch'])->name('client.batch');
                 //管理客戶資料-批次下載excel範本
                 Route::get('/download-excel-template', [ClientController::class, 'downloadExcelTemplate'])->name('download-excel-template');
-
                 //管理廠商資料
                 Route::get('vendor', [VendorController::class, 'index'])->name('vendor.index');
                 //管理廠商資料-搜尋
@@ -194,6 +194,8 @@ Route::middleware('auth')->group(function () {
                 //設置輪班表
                 Route::get('rotation', [RotationListController::class, 'index'])->name('rotation.index');
 
+                //排程資料 (未完成)
+                //Route::get('plan', [PlanController::class, 'index'])->name('plan.index');
 
                 //管理配送單資料
                 Route::get('deliveryserviceorder', [DeliveryServiceOrderController::class, 'index'])->name('deliveryserviceorder.index');
@@ -209,6 +211,7 @@ Route::middleware('auth')->group(function () {
                 Route::patch('deliveryserviceorder/{editDeliveryserviceorder}', [DeliveryServiceOrderController::class, 'update'])->name('deliveryserviceorder.update');
                 //管理配貨單資料-刪除
                 Route::delete('deliveryserviceorder/{deliveryserviceorder}', [DeliveryServiceOrderController::class, 'destroy'])->name('deliveryserviceorder.destroy');
+
                 //注意事項
                 Route::get('Keynote', [KeyNoteController::class, 'index'])->name('keynote.index');
                 //注意事項-編輯
