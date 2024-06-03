@@ -29,7 +29,6 @@ class UpdateDeliveryOrderRequest extends FormRequest
             'scheduled_at' => 'date',
             'shipment_at' => 'date',
             'delivery_status_id' => 'integer',
-            'created_by' => 'string|max:255',
         ];
     }
 }

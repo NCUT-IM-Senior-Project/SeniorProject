@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
+    // 避免預設日期時間戳
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *

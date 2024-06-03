@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RequirementItem;
 use App\Models\Vendor;
 use App\Http\Requests\StoreVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
@@ -17,7 +18,9 @@ class VendorController extends Controller
     public function index()
     {
         $vendors = Vendor::paginate(9);
-        return view('vendor.index', compact('vendors'));
+        $requirement_items = $this->create();
+
+        return view('vendor.index', compact('vendors', 'requirement_items'));
     }
 
     /**
@@ -32,7 +35,9 @@ class VendorController extends Controller
     }
     public function create()
     {
+        $requirement_items = RequirementItem::all();
 
+        return $requirement_items;
     }
 
     /**

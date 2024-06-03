@@ -45,12 +45,13 @@ class CarController extends Controller
      */
     public function create()
     {
-        // 獲取 permission_id 為 2 且不在 car 資料表中的司機
         $drivers = User::select('id', 'name')
-                       ->where('permission_id', 2)
-                       ->where('status', 0)
-                       ->whereNotIn('id', Car::pluck('driver_id'))
-                       ->get();
+            ->where('permission_id', 2)
+            ->where('status', 0)
+            ->whereNotIn('id', function ($query) {
+                $query->select('driver_id')->from('cars');
+            })->get();
+
 
         return $drivers;
     }
@@ -68,7 +69,7 @@ class CarController extends Controller
 
         // 資料保存後轉跳回新書總表
         return redirect(route('car.index'))->with([
-            'success' => '帳號新增成功！',
+            'success' => '車輛新增成功！',
             'type' => 'success',
         ]);
     }
@@ -93,7 +94,7 @@ class CarController extends Controller
             $car->tailgate = $car->tailgate == 1 ? '有' : '無';
             return $car;
         });
-
+        //編輯車輛司機舊的值尚未完成
         $drivers = $this->create();
 
         return view('car.index', compact('cars','editCar', 'drivers'));

@@ -22,7 +22,9 @@ class StoreDeliveryPlanDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'delivery_orders.*.delivery_order_id' => 'required|string|max:255',
+            'delivery_orders.*.sequence' => 'required|string|max:255',
+            'delivery_orders.*.plans_details_status_id' => 'required|integer',
         ];
     }
 }

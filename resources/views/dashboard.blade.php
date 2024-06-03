@@ -127,7 +127,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
                         <div class="flex flex-col bg-white h-40 border border-t-4 border-t-fuchsia-600 shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:border-t-fuchsia-500 dark:shadow-neutral-700/70">
                             <div class="p-4 md:p-5">
