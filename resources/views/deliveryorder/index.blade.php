@@ -104,8 +104,8 @@
                                             </td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $deliveryorder -> order_number }}</td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ optional($deliveryorder->logistic)->name }}</td>
-                                            <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $deliveryorder -> scheduled_at }}</td>
-                                            <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $deliveryorder -> shipment_at }}</td>
+                                            <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ date('Y-m-d', strtotime($deliveryorder->scheduled_at)) }}</td>
+                                            <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ date('Y-m-d', strtotime($deliveryorder->shipment_at)) }}</td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ optional($deliveryorder->deliveryOrderStatus)->name }}</td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ optional($deliveryorder->user)->name }}</td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">

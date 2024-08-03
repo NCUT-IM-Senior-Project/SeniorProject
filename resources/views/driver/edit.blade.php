@@ -1,5 +1,5 @@
 <!-- 修改司機資訊 -->
-<p class="transition duration-1000 text-gray-600 text-sm dark:text-gray-200">新增輪值廠商資料</p>
+<p class="transition duration-1000 text-gray-600 text-sm dark:text-gray-200">編輯司機資料</p>
 <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
     <div class="mx-auto max-w-full px-4 py-4 sm:px-6 sm:py-4 lg:px-8">
         <form action="{{ route('driver.update', $editDriver) }}" method="POST" role="form">

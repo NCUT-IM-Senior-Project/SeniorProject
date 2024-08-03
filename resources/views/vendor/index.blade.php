@@ -54,12 +54,16 @@
                                             <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">#{{ $vendor -> id }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $vendor -> partner_id }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $vendor -> name }}</td>
-                                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $vendor -> address }}</td>
+                                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ Str::limit($vendor->address, 24) }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $vendor -> land_line }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $vendor -> fax }}</td>
-                                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $vendor -> description }}</td>
+                                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ Str::limit($vendor->description, 24) }}</td>
                                             <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 <div class="flex items-center">
+                                                    <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-gray-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#vendorDate-modal-{{ $vendor->partner_id }}">
+                                                        檢視
+                                                    </button>
+                                                    <span class="mx-2">|</span>
                                                     <a href="{{ route('vendor.edit', $vendor) }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">編輯</a>
                                                     <span class="mx-2">|</span>
                                                     <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteVendorAccout-modal-{{ $vendor -> id }}">
@@ -68,6 +72,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+
                                         <div id="deleteVendorAccout-modal-{{ $vendor -> id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]" data-hs-overlay-keyboard="false">
                                             <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
                                                 <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
@@ -100,6 +105,41 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- 廠商資料彈出視窗 vendorDate-modal- -->
+                                        <div id="vendorDate-modal-{{ $vendor->partner_id }}" class="hs-overlay hidden fixed top-0 left-0 w-full h-full z-[80] bg-gray-900 bg-opacity-50 flex justify-center items-center overflow-x-hidden overflow-y-auto">
+                                            <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                                <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                                                    <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+                                                        <h3 class="font-bold text-gray-800 dark:text-white">
+                                                            廠商帳號細項
+                                                        </h3>
+                                                        <button type="button" class="w-8 h-8 flex justify-center items-center text-gray-800 dark:text-white hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 dark:focus:ring-gray-600 rounded-full" data-hs-overlay="#vendorDate-modal-{{ $vendor->partner_id }}">
+                                                            <span class="sr-only">Close</span>
+                                                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="p-6">
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">客戶編號：{{ $vendor->partner_id }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">公司名稱：{{ $vendor->name }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">地址：{{ $vendor->address }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">市話：{{ $vendor->land_line }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">傳真：{{ $vendor->fax }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">備註：{{ $vendor->description}}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">特殊需求：{{ $vendor->requirementItems }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">聯絡人：{{ $vendor->contactPeopleName }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">聯絡人手機：{{ $vendor->contactPeoplePhone }}</p>
+                                                    </div>
+                                                    <div class="flex justify-end items-center py-4 px-6 border-t border-gray-200 dark:border-gray-700">
+                                                        <button type="button" class="px-4 py-2 text-sm font-semibold text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 dark:bg-slate-900 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-600" data-hs-overlay="#vendorDate-modal-{{ $vendor->partner_id }}">
+                                                            關 閉
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End 廠商資料彈出視窗 -->
 
                                     @endforeach
                                     <!-- 填充表身高度 -->
