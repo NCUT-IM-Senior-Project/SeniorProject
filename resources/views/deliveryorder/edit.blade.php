@@ -37,7 +37,9 @@
                                          }'value="{{ old('partner_id',  $deliveryOrder -> partner_id ) }}"  class="hidden" >
                                     <option value="">Choose</option>
                                     @foreach($clients as $client)
-                                        <option value="{{ $client->partner_id }}">客戶{{ $client->partner_id }} | {{ $client->name }}</option>
+                                        <option value="{{ $client->partner_id }}" {{ (old('partner_id', $deliveryOrder->partner_id) == $client->partner_id) ? 'selected' : '' }}>
+                                            客戶{{ $client->partner_id }} | {{ $client->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <div class="absolute top-1/2 end-3 -translate-y-1/2">
@@ -81,7 +83,9 @@
                                          value="{{ old('logistics_id',  $deliveryOrder -> logistics_id ) }}"  class="hidden" id="logistics_id" name="logistics_id">>
                                     <option value="">選擇物流類型</option>
                                     @foreach($logistics as $logistic)
-                                        <option value="{{ $logistic->id }}">{{ $logistic->name }}</option>
+                                        <option value="{{ $logistic->id }}" {{ (old('logistics_id', $deliveryOrder->logistics_id) == $logistic->id) ? 'selected' : '' }}>
+                                            {{ $logistic->name }}
+                                        </option>
                                     @endforeach
                                 </select>
 
@@ -99,14 +103,13 @@
                 <div class="col-span-5 sm:col-span-2">
                     <div class="row-start-2 col-span-4 sm:col-span-2">
                         <label for="scheduled_at" class="block text-sm font-medium mb-2 dark:text-white">預定交期</label>
-                        <input type="date" id="scheduled_at" name="scheduled_at" value="{{ old('scheduled_at',  $deliveryOrder -> scheduled_at ) }}" class="py-3 px-4 block w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                        <input type="date" id="scheduled_at" name="scheduled_at" value="{{ old('scheduled_at', $deliveryOrder->scheduled_at ? \Carbon\Carbon::parse($deliveryOrder->scheduled_at)->format('Y-m-d') : '') }}" class="py-3 px-4 block w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                         @error('scheduled_at')
                         <div class="text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <!-----
-
                 <div class="col-span-5 sm:col-span-2">
                     <div class="col-span-4 sm:col-span-1">
                         <label for="created_by" class="block text-sm font-medium mb-2 dark:text-white">創建者</label>
@@ -117,7 +120,7 @@
                 <div class="col-span-5 sm:col-span-2">
                     <div class="row-start-2 col-span-4 sm:col-span-2">
                         <label for="shipment_at" class="block text-sm font-medium mb-2 dark:text-white">出貨日期</label>
-                        <input type="date" id="shipment_at" name="shipment_at" value="{{ old('shipment_at',  $deliveryOrder -> shipment_at ) }}" class="py-3 px-4 block w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                        <input type="date" id="shipment_at" name="shipment_at" value="{{ old('shipment_at', $deliveryOrder->shipment_at ? \Carbon\Carbon::parse($deliveryOrder->shipment_at)->format('Y-m-d') : '') }}" class="py-3 px-4 block w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                         @error('shipment_at')
                         <div class="text-red-400">{{ $message }}</div>
                         @enderror

@@ -136,7 +136,8 @@ class DeliveryOrderController extends Controller
         $clients = Client::all();
         $vendors = Vendor::all();
         $logistics = Logistic::all();
-        return view('deliveryorder.edit', compact('deliveryOrder', 'clients', 'vendors', 'logistics'));
+        $deliveryorders = DeliveryOrder::paginate(10);
+        return view('deliveryorder.index', compact('deliveryOrder', 'clients', 'vendors', 'logistics','deliveryorders'));
     }
 
     public function update(UpdateDeliveryOrderRequest $request, DeliveryOrder $deliveryOrder)
@@ -149,6 +150,7 @@ class DeliveryOrderController extends Controller
             'type' => 'success',
         ]);
     }
+
 
 
     /**

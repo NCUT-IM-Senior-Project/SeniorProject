@@ -33,7 +33,7 @@ class DeliveryServiceOrderController extends Controller
             $deliveryserviceorder->return_at = Carbon::parse($deliveryserviceorder->return_at)->format('Y-m-d');
         });
 
-         return $deliveryserviceorders;
+        return $deliveryserviceorders;
     }
     /**
      * Display a listing of the resource.
