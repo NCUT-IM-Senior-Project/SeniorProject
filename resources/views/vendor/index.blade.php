@@ -8,7 +8,7 @@
     @if(isset($editVendor))
         @include('vendor.edit', compact('editVendor'))
     @else
-        @include('vendor.create')
+        @include('vendor.create',compact('requirement_items'))
     @endif
 
 @endsection
@@ -121,7 +121,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="p-6">
-                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">客戶編號：{{ $vendor->partner_id }}</p>
+                                                        <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">廠商編號：{{ $vendor->partner_id }}</p>
                                                         <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">公司名稱：{{ $vendor->name }}</p>
                                                         <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">地址：{{ $vendor->address }}</p>
                                                         <p class="text-sm text-gray-800 dark:text-gray-200 mb-2">市話：{{ $vendor->land_line }}</p>

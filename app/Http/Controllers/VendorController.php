@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RequirementData;
 use App\Models\RequirementItem;
+use App\Models\ContactPerson;
 use App\Models\Vendor;
 use App\Http\Requests\StoreVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
@@ -18,6 +20,29 @@ class VendorController extends Controller
     public function index()
     {
         $vendors = Vendor::paginate(9);
+
+        $vendors->each(function ($vendor) {
+            // 取得聯絡人資訊
+            $contactPerson = ContactPerson::where('partner_id', $vendor->partner_id)
+                ->select('name', 'phone')
+                ->first();
+
+            // 將聯絡人資訊加入廠商資料
+            $vendor->contactPeopleName = $contactPerson ? $contactPerson->name : null;
+            $vendor->contactPeoplePhone = $contactPerson ? $contactPerson->phone : null;
+
+            // 取得需求編號資料
+            $requirementData = RequirementData::where('partner_id', $vendor->partner_id)
+                ->pluck('requirement_items_id');
+
+            // 取得需求項目名稱陣列
+            $requirementItems = RequirementItem::whereIn('id', $requirementData)
+                ->pluck('name')
+                ->toArray();
+
+            $vendor->requirementItems = implode(', ', $requirementItems);
+        });
+
         $requirement_items = $this->create();
 
         return view('vendor.index', compact('vendors', 'requirement_items'));
