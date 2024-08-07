@@ -4,8 +4,26 @@
 
     @section('page-content')
 
-        <!-- 廠商資訊總覽 -->
-        <p class="text-gray-600 text-sm dark:text-gray-200">客戶送貨單細項總覽</p>
+        <!-- 頁籤 -->
+        <div>
+            <div class="sm:hidden">
+                <label for="tabs" class="sr-only">Select a tab</label>
+                <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                    <option>客戶送貨單細項總覽</option>
+                    <option>新增客戶送貨單細項</option>
+                </select>
+            </div>
+            <div class="hidden sm:block">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                        <a href="{{ route('clientorderdetail.index') }}" class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">客戶送貨單細項總覽</a>
+                        <a href="{{ route('clientorderdetail.create') }}" class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">新增客戶送貨單細項</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
         <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
             <div class="mx-auto max-w-auto px-2 py-4 sm:px-2 sm:py-8 lg:px-8">
                 <div class="flex flex-col">

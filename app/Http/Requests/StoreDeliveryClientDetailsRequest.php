@@ -22,12 +22,18 @@ class StoreDeliveryClientDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'delivery_order_id'=> 'required|integer|max:255',
-            'name' => 'required|string|max:255',
-            'specification' => 'nullable|string|max:255',
-            'quantity' => 'required|integer|min:1', // 確保正整數
-            'weight' => 'nullable|string|regex:/^\d{1,3}(?:\.\d{1,2})?KG$/|max:255',
-            'description' => 'nullable|string|max:255',
+            'delivery_order_id' => 'required|array',
+            'delivery_order_id.*' => 'required|exists:delivery_orders,id',
+            'name' => 'required|array',
+            'name.*' => 'required|string|max:255',
+            'specification' => 'required|array',
+            'specification.*' => 'required|string|max:255',
+            'quantity' => 'required|array',
+            'quantity.*' => 'required|integer|min:1',
+            'weight' => 'required|array',
+            'weight.*' => 'required|numeric|min:0',
+            'description' => 'nullable|array',
+            'description.*' => 'nullable|string|max:255',
         ];
     }
 }

@@ -22,9 +22,8 @@ class DeliveryClientDetailsController extends Controller
         $deliveryorders = DeliveryOrder::all();
         $clients = Client::all();
         $deliveryClientDetails = DeliveryClientDetail::paginate(9);
-        //dd($deliveryorders);
-        // 返回搜尋結果視圖
-        return view('clientorderdetail.index', compact('deliveryClientDetails','clients','deliveryorders'));
+
+        return view('clientorderdetail.index', compact('deliveryClientDetails', 'clients', 'deliveryorders'));
     }
 
     public function search(Request $request)
@@ -62,27 +61,48 @@ class DeliveryClientDetailsController extends Controller
      */
     public function create()
     {
-        //
+        $deliveryorders = DeliveryOrder::all();
+        $clients = Client::all();
+        return view('clientorderdetail.create', compact('clients', 'deliveryorders'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created client order detail in storage.
+     *
+     * @param  \App\Http\Requests\StoreDeliveryClientDetailsRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreDeliveryClientDetailsRequest $request)
     {
+        // 獲取已驗證的數據
+        $validatedData = $request->validated();
 
-            // 獲取已驗證的數據
-            $validatedData = $request->validated();
-            DeliveryClientDetail::create($validatedData);
+        // 處理多行輸入數據
+        $deliveryOrderDetails = [];
+        for ($i = 0; $i < count($validatedData['delivery_order_id']); $i++) {
+            $deliveryOrderDetails[] = [
+                'delivery_order_id' => $validatedData['delivery_order_id'][$i],
+                'name' => $validatedData['name'][$i],
+                'specification' => $validatedData['specification'][$i],
+                'quantity' => $validatedData['quantity'][$i],
+                'weight' => $validatedData['weight'][$i],
+                'description' => $validatedData['description'][$i],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
 
-            //  dd($validatedData);
+        // 插入數據
+        try {
+            DeliveryClientDetail::insert($deliveryOrderDetails);
 
-            // 如果成功創建，返回成功響應或重定向到某個頁面
             return redirect()->route('deliveryorder.index')->with([
                 'success' => '送貨單細項新增成功！',
                 'type' => 'success',
             ]);
-
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => '送貨單細項新增失敗，請稍後再試。']);
+        }
     }
     /**
      * Display the specified resource.

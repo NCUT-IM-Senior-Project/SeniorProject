@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
         Route::get('client/batch', [ClientController::class, 'batch'])->name('client.batch');
         //管理客戶資料-批次下載excel範本
         Route::get('/download-excel-template', [ClientController::class, 'downloadExcelTemplate'])->name('download-excel-template');
+
         //管理廠商資料
         Route::get('vendor', [VendorController::class, 'index'])->name('vendor.index');
         //管理廠商資料-搜尋
@@ -102,7 +103,7 @@ Route::middleware('auth')->group(function () {
         //管理廠商資料-編輯
         Route::get('vendor/{vendor}/edit', [VendorController::class, 'edit'])->name('vendor.edit');
         //管理廠商資料-更新
-        Route::patch('vendor/{editVendor}', [VendorController::class, 'update'])->name('vendor.update');
+        Route::patch('vendor/{vendor}', [VendorController::class, 'update'])->name('vendor.update');
         //管理廠商資料-刪除
         Route::delete('vendor/{vendor}', [VendorController::class, 'destroy'])->name('vendor.destroy');
         //管理廠商資料-批次
@@ -125,8 +126,13 @@ Route::middleware('auth')->group(function () {
         Route::patch('/deliveryorder/{deliveryOrder}', [DeliveryOrderController::class, 'update'])->name('deliveryorder.update');
         //管理送貨單資料-刪除
         Route::delete('deliveryorder/{deliveryorder}', [DeliveryOrderController::class, 'destroy'])->name('deliveryorder.destroy');
+
+        // 管理送貨單客戶細項 - 新增
+        Route::get('/clientorderdetail/create', [DeliveryClientDetailsController::class, 'create'])->name('clientorderdetail.create');
         // 管理送貨單客戶細項 - 新增
         Route::post('/deliveryclientdetail/store', [DeliveryClientDetailsController::class, 'store'])->name('deliveryclientdetail.store');
+
+
         // 管理送貨單廠商細項 - 新增
         Route::post('/deliveryvendordetail/store', [DeliveryVendorDetailsController::class, 'store'])->name('deliveryvendordetail.store');
         // 管理送貨單客戶細項 - 客戶
