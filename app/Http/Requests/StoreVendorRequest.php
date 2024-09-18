@@ -22,12 +22,16 @@ class StoreVendorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'partner_id' => 'required|string|max:255',
+            'partner_id' => 'required|string|max:255|unique:vendors,partner_id',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'land_line' => 'required|string|max:255',
             'fax' => 'required|string|max:255',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:255',
+            'contactPeopleName' => 'nullable|string|max:255',
+            'contactPeoplePhone' => 'nullable|string|max:255',
+            'requirementItems' => 'required|array',
+            'requirementItems.*' => 'required|exists:requirement_items,id',
         ];
     }
 }

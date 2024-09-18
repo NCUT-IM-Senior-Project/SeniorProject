@@ -20,4 +20,8 @@ class RequirementItem extends Model
     {
         return $this->hasMany(RequirementData::class);
     }
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class, 'requirement_item_vendor', 'requirement_item_id', 'vendor_id');
+    }
 }

@@ -1,16 +1,14 @@
 @extends('layouts.app')
+
 @section('title', '管理廠商資料')
-
-
 
 @section('page-form')
     <!-- 判斷是否有進入編輯表單路由 -->
     @if(isset($editVendor))
         @include('vendor.edit', compact('editVendor'))
     @else
-        @include('vendor.create',compact('requirement_items'))
+        @include('vendor.create', compact('requirement_items'))
     @endif
-
 @endsection
 
 @section('page-content')
@@ -87,7 +85,7 @@
                                                     </div>
                                                     <div class="p-4 overflow-y-auto">
                                                         <p class="text-gray-800 dark:text-gray-200 font-bold">
-                                                            廠商 {{ $vendor->name }} 的資料將會被刪除，確定要刪除嗎？
+                                                            廠商 {{ $vendor->partner_id }} 的資料將會被刪除，確定要刪除嗎？
                                                         </p>
                                                     </div>
                                                     <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">

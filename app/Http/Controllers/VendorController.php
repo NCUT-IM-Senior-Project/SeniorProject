@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateVendorRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
@@ -70,12 +71,40 @@ class VendorController extends Controller
      */
     public function store(StoreVendorRequest $request)
     {
+        // 檢查表單提交的數據
+        // dd($request->all()); // 確保你獲取到 requirementItems 數據
+
         try {
             // 獲取已驗證的數據
             $validatedData = $request->validated();
 
-            // 驗證成功
-            Vendor::create($validatedData);
+            // 使用事務來確保資料一致性
+            DB::transaction(function () use ($validatedData) {
+                // 新增廠商資料
+                $vendor = Vendor::create($validatedData);
+
+                // 新增聯絡人資料
+                if (!empty($validatedData['contactPeopleName']) && !empty($validatedData['contactPeoplePhone'])) {
+                    ContactPerson::create([
+                        'partner_id' => $vendor->partner_id,
+                        'name' => $validatedData['contactPeopleName'],
+                        'phone' => $validatedData['contactPeoplePhone'],
+                    ]);
+                }
+
+                // 新增需求項目資料
+                if (!empty($validatedData['requirementItems'])) {
+                    $requirementData = array_map(function($item) use ($vendor) {
+                        return [
+                            'partner_id' => $vendor->partner_id,
+                            'requirement_items_id' => $item,
+                        ];
+                    }, $validatedData['requirementItems']);
+
+                    // 批量插入需求項目
+                    RequirementData::insert($requirementData);
+                }
+            });
 
             // 資料保存後轉跳回廠商總表
             return redirect(route('vendor.index'))->with([
@@ -85,7 +114,6 @@ class VendorController extends Controller
         } catch (QueryException $e) {
             // 檢查是否是唯一性約束違規（錯誤碼 1062）
             if ($e->errorInfo[1] == 1062) {
-                // 處理重複 partner_id 的情況
                 return redirect()->back()->with([
                     'error' => '廠商新增失敗，該編號已經存在。',
                     'type' => 'error',
@@ -93,11 +121,14 @@ class VendorController extends Controller
             }
             // 其他錯誤情況的處理
             return redirect()->back()->with([
-                'error' => '廠商新增失敗，請稍後再試。',
+                'error' => '廠商新增失敗，請稍後再試。' . $e->getMessage(), // 附加錯誤信息，方便調試
                 'type' => 'error',
             ]);
         }
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -110,35 +141,69 @@ class VendorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vendor $vendor)
+    public function edit($id)
     {
-        $editVendor = $vendor;
-        $vendors = Vendor::paginate(9);
-        return view('vendor.index', compact('vendors', 'editVendor'));
+        $editVendor = Vendor::findOrFail($id);
+        $requirementItems = RequirementItem::all();
+        $contactPeople = ContactPerson::where('partner_id', $editVendor->partner_id)->get();
+        $currentRequirementData = RequirementData::where('partner_id', $editVendor->partner_id)->first();
+
+        $primaryContactPerson = $contactPeople->first();
+
+        return view('vendor.edit', compact('editVendor', 'contactPeople', 'requirementItems', 'currentRequirementData', 'primaryContactPerson'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateVendorRequest $request, Vendor $editVendor)
+    public function update(UpdateVendorRequest $request, Vendor $vendor)
     {
-        $editVendor -> update($request->validated());
+        // 開始資料庫交易
+        DB::beginTransaction();
+        try {
+            // 更新廠商資料
+            $vendor->update($request->validated());
 
-        return redirect(route('vendor.index'))->with([
-            'success' => '廠商 '. $editVendor-> name . ' 資料更新成功！',
-            'type' => 'success',
-        ]);
+            // 更新或創建特殊需求資料
+            RequirementData::updateOrCreate(
+                ['partner_id' => $vendor->partner_id],
+                ['requirement_items_id' => $request->requirement_items_id]
+            );
+            dd($request->all());
+
+            // 提交
+            DB::commit();
+
+
+            return redirect(route('vendor.index'))->with([
+                'success' => '廠商 ' . $vendor->name . ' 資料更新成功！',
+                'type' => 'success',
+            ]);
+        } catch (\Exception $e) {
+            // 如果出現錯誤，回滾交易
+            DB::rollback();
+
+            return redirect()->back()->with([
+                'error' => '更新失敗：' . $e->getMessage(),
+                'type' => 'error',
+            ])->withInput();
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Vendor $vendor)
     {
+        // 刪除相同 partner_id 的 requirement_data
+        RequirementData::where('partner_id', $vendor->partner_id)->delete();
+
+        // 刪除相同 partner_id 的 contact_people
+        ContactPerson::where('partner_id', $vendor->partner_id)->delete();
+
+        // 刪除廠商資料
         $vendor->delete();
 
         return redirect(route('vendor.index'))->with([
-            'success' => '廠商 [編號：'. $vendor-> id.'] 刪除成功！',
+            'success' => '廠商 [編號：'. $vendor->partner_id .'] 及相關資料刪除成功！',
             'type' => 'success',
         ]);
     }

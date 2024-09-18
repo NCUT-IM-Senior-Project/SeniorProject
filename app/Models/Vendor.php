@@ -33,18 +33,23 @@ class Vendor extends Model
     //聯絡人
     public function contactPerson()
     {
-        return $this->hasMany(ContactPerson::class);
+        return $this->hasMany(ContactPerson::class, 'partner_id');
     }
 
     //需求資料
     public function requirementData()
     {
-        return $this->hasMany(RequirementData::class);
+        return $this->hasMany(RequirementItem::class, 'partner_id');
     }
 
     //送貨單
     public function deliveryOrder()
     {
         return $this->hasMany(DeliveryOrder::class);
+    }
+
+    public function requirementItems()
+    {
+        return $this->belongsToMany(RequirementItem::class, 'requirement_item_vendor', 'vendor_id', 'requirement_item_id');
     }
 }

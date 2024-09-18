@@ -34,31 +34,34 @@
                                     </div>
 
 
-                                <!-- 下拉式選單選擇廠商 -->
-                                <div class="sm:col-span-5  relative flex items-center">
-                                    <label for="partner_id" class="sr-only">選擇廠商/客戶</label>
-                                    <select name="partner_id" id="partner_id"  data-hs-select='{
-                                    "hasSearch": true,
-                                    "searchPlaceholder": "授尋廠商/客戶 送貨單...",
-                                     "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3",
-                                      "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-slate-900",
-                                      "placeholder": "選擇廠商/客戶",
-                                       "toggleTag": "<button type=\"button\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-gray-200\" data-title></span></button>",
-                                       "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
-                                        "dropdownClasses": "mt-2 max-h-[300px] pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-slate-900 dark:border-gray-700", "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-200 dark:focus:bg-slate-800", "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>" }' class="block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3" id="partner_id" name="partner_id">
-                                        <option value="">Choose</option>
-                                        @foreach($vendors as $vendor)
-                                            <option value="{{ $vendor->partner_id }}">廠商{{ $vendor->partner_id }} | {{ $vendor->name }}</option>
-                                        @endforeach
-                                        @foreach($clients as $client)
-                                            <option value="{{ $client->partner_id }}">客戶{{ $client->partner_id }} | {{ $client->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none">
-                                        <svg class="flex-shrink-0 w-3.5 h-3.5 text-gray-500 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+                                    <!-- 下拉式選單選擇廠商 -->
+                                    <div class="sm:col-span-5 relative flex items-center">
+                                        <label for="partner_id" class="sr-only">選擇廠商/客戶</label>
+                                        <select name="partner_id" id="partner_id" data-hs-select='{
+                                            "hasSearch": true,
+                                            "searchPlaceholder": "授尋廠商/客戶 送貨單...",
+                                            "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3",
+                                            "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-slate-900",
+                                            "placeholder": "選擇廠商/客戶",
+                                            "toggleTag": "<button type=\"button\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-gray-200\" data-title></span></button>",
+                                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+                                            "dropdownClasses": "mt-2 max-h-[300px] pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-slate-900 dark:border-gray-700",
+                                            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-200 dark:focus:bg-slate-800",
+                                            "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>"
+                                        }' class="block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3 w-80" id="partner_id" name="partner_id">
+                                            <option value="">選擇</option>
+                                            @foreach($vendors as $vendor)
+                                                <option value="{{ $vendor->partner_id }}">廠商{{ $vendor->partner_id }} | {{ $vendor->name }}</option>
+                                            @endforeach
+                                            @foreach($clients as $client)
+                                                <option value="{{ $client->partner_id }}">客戶{{ $client->partner_id }} | {{ $client->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none">
+                                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-gray-500 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- 提交按鈕 -->
+                                    <!-- 提交按鈕 -->
                                     <button type="submit" name="search_type" value="partner" class="py-2 px-3 ml-2 flex items-center gap-x-3 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                         <span>按廠商/客戶搜索</span>
                                     </button>
@@ -85,7 +88,7 @@
                                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700 overflow-y-auto">
                                     @foreach($deliveryorders as $deliveryorder)
                                         <tr>
-                                            <td class="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">#{{ $deliveryorder -> id }}</td>
+                                            <td class="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{{ $deliveryorder -> id }}</td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $deliveryorder -> keynote }}</td>
                                             <td class="px-5 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                 @php
