@@ -1,50 +1,50 @@
     @extends('layouts.app')
     @section('title', '管理客戶送貨單細項資料')
-
-
     @section('page-content')
 
-        <!-- 頁籤 -->
-        <div>
-            <div class="sm:hidden">
-                <label for="tabs" class="sr-only">Select a tab</label>
-                <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                    <option>客戶送貨單細項總覽</option>
-                    <option>新增客戶送貨單細項</option>
-                </select>
-            </div>
-            <div class="hidden sm:block">
-                <div class="border-b border-gray-200">
-                    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-                        <a href="{{ route('clientorderdetail.index') }}" class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">客戶送貨單細項總覽</a>
-                        <a href="{{ route('clientorderdetail.create') }}" class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">新增客戶送貨單細項</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
-            <div class="mx-auto max-w-auto px-2 py-4 sm:px-2 sm:py-8 lg:px-8">
-                <div class="flex flex-col">
-                    <div class="-m-1.5 overflow-x-auto ">
-                        <div class="p-1 min-w-full inline-block align-middle ">
+            <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white">
+                <div class="mx-auto max-w-auto px-2 py-4 sm:px-2 sm:py-8 lg:px-8">
+                    <div class="flex flex-col">
+                        <div class="-m-1.5 overflow-x-auto  ">
+                            <div class="p-1 min-w-full inline-block align-middle ">
+                            <!-- 頁籤 -->
+                            <div>
+                                <div class="sm:hidden">
+                                    <label for="tabs" class="sr-only">Select a tab</label>
+                                    <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        <option>客戶送貨單細項總覽</option>
+                                        <option>新增客戶送貨單細項</option>
+                                    </select>
+                                </div>
+                                <div class="hidden sm:block">
+                                    <div class="border-b border-gray-200">
+                                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                                            <a href="{{ route('clientorderdetail.index') }}" class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">客戶送貨單細項總覽</a>
+                                            <a href="{{ route('clientorderdetail.create') }}" class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">新增客戶送貨單細項</a>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700 ">
                                 <form action="{{ route('clientorderdetail.search') }}" method="GET">
-                                    <div class="py-4 px-5 flex items-center space-x-4 ">
+                                    <div class="py-4 px-5 flex items-center space-x-6 ">
 
                                         <!-- 下拉式選單選擇客戶 -->
                                         <div class="sm:col-span-5  relative flex items-center">
+
                                             <label for="partner_id" class="sr-only">選擇客戶</label>
                                             <select name="partner_id" id="partner_id"  data-hs-select='{
-                                                "hasSearch": true,
-                                                "searchPlaceholder": "授尋客戶...",
-                                                "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3",
-                                                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-slate-900",
-                                                "placeholder": "選擇客戶",
-                                                "toggleTag": "<button type=\"button\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-gray-200\" data-title></span></button>",
-                                                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
-                                                "dropdownClasses": "mt-2 max-h-[300px] pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-slate-900 dark:border-gray-700", "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-200 dark:focus:bg-slate-800", "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>" }' class="block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3" id="partner_id" name="partner_id">
+                                            "hasSearch": true,
+                                            "searchPlaceholder": "授尋客戶",
+                                            "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3",
+                                            "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-slate-900",
+                                            "placeholder": "選擇客戶",
+                                            "toggleTag": "<button type=\"button\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-gray-200\" data-title></span></button>",
+                                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-2 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+                                            "dropdownClasses": "mt-2 max-h-[300px] pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-slate-900 dark:border-gray-700",
+                                            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-200 dark:focus:bg-slate-800",
+                                            "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>"
+                                            }' class="block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 py-2 px-3 w-80" id="partner_id" name="partner_id">
                                                 <option value="">選擇客戶</option>
                                                 @foreach($clients as $client)
                                                     <option value="{{ $client->id }}">客戶{{ $client->id }} | {{ $client->name }}</option>
@@ -55,7 +55,7 @@
                                             </div>
                                         </div>
                                         <!-- 提交按鈕 -->
-                                        <button type="submit" name="search_type" value="partner" class="py-2 px-3 ml-2 flex items-center gap-x-3 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                        <button type="submit" name="search_type" value="partner" class="py-2 px-3 ml-2 flex items-center gap-x-3  text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                             <span>按客戶搜索</span>
                                         </button>
 
@@ -96,7 +96,9 @@
                                                         檢視
                                                     </button>
                                                     <span class="mx-2">|</span>
-                                                    <a href="#" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">編輯</a>
+                                                    <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#editModal-{{ $clientorderdetail->id }}">
+                                                        編輯
+                                                    </button>
                                                     <span class="mx-2">|</span>
                                                     <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deleteClientorderdetail-modal-{{ $clientorderdetail->id }}">
                                                         刪除
@@ -104,7 +106,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-
+                                    @endforeach
                                         <!-- 刪除客戶送貨單細項資料彈出視窗 -->
                                         <div id="deleteClientorderdetail-modal-{{ $clientorderdetail->id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
                                             <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
@@ -139,46 +141,96 @@
                                             </div>
                                         </div>
 
-                                        <!-- 送貨單資料彈出視窗 deliveryorderData-modal- -->
-                                        @foreach($deliveryorders as $deliveryorder)
-                                            @if($deliveryorder->deliveryClientDetail)
-                                                <div id="deliveryorderData-modal-{{ $clientorderdetail->id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
-                                                <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-                                                    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
-                                                        <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
-                                                            <h3 class="font-bold text-gray-800 dark:text-white">
-                                                                送貨單
-                                                            </h3>
-                                                            <button type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deliveryorderData-modal-{{$clientorderdetail->id }}">
-                                                                <span class="sr-only">Close</span>
-                                                                <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                                                            </button>
+                                        <!-- 檢視細項資料彈窗 -->
+                                        @foreach($deliveryClientDetails as $clientorderdetail)
+                                            @foreach($deliveryorders as $deliveryorder)
+                                                @if($deliveryorder->id == $clientorderdetail->delivery_order_id)
+                                                    <!-- 送貨單資料彈出視窗 deliveryorderData-modal- -->
+                                                    <div id="deliveryorderData-modal-{{ $clientorderdetail->id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
+                                                        <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                                            <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                                                                <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+                                                                    <h3 class="font-bold text-gray-800 dark:text-white">
+                                                                        送貨單
+                                                                    </h3>
+                                                                    <button type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deliveryorderData-modal-{{$clientorderdetail->id }}">
+                                                                        <span class="sr-only">Close</span>
+                                                                        <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="p-4 overflow-y-auto h-auto">
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">主旨：{{ $deliveryorder->keynote }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">客戶名稱：{{ $deliveryorder->partner_id }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">訂單編號：{{ $deliveryorder->order_number }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">物流類型：{{ optional($deliveryorder->logistic)->name }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">預定交期：{{ $deliveryorder->scheduled_at }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">出貨日期：{{ $deliveryorder->shipment_at }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">訂單狀態：{{ optional($deliveryorder->deliveryOrderStatus)->name }}</p>
+                                                                    <p class="text-gray-800 dark:text-gray-200 font-bold">創建者：{{ optional($deliveryorder->user)->name }}</p>
+                                                                </div>
+                                                                <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
+                                                                    <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deliveryorderData-modal-{{$clientorderdetail->id }}">
+                                                                        關 閉
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="p-4 overflow-y-auto h-auto">
-                                                                <p class="text-gray-800 dark:text-gray-200 font-bold">主旨：{{ $deliveryorder->keynote }}</p>
-                                                                <p class="text-gray-800 dark:text-gray-200 font-bold">客戶名稱：{{ $deliveryorder->partner_id }}</p>
-                                                                <p class="text-gray-800 dark:text-gray-200 font-bold">訂單編號：{{ $deliveryorder->order_number }}</p>
-                                                                <p class="text-gray-800 dark:text-gray-200 font-bold">物流類型：{{ optional($deliveryorder->logistic)->name }}</p>
-                                                                <p class="text-gray-800 dark:text-gray-200 font-bold">預定交期：{{ $deliveryorder -> scheduled_at }}</p>
-                                                               <p class="text-gray-800 dark:text-gray-200 font-bold">出貨日期：{{ $deliveryorder -> shipment_at}}</p>
-                                                                <p class="text-gray-800 dark:text-gray-200 font-bold">訂單狀態：{{ optional($deliveryorder->deliveryOrderStatus)->name }}</p>
-                                                               <p class="text-gray-800 dark:text-gray-200 font-bold">創建者：{{ optional($deliveryorder->user)->name  }}</p>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                        <!-- end檢視細項資料彈窗 -->
 
-                                                        </div>
-                                                        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
-                                                            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#deliveryorderData-modal-{{$clientorderdetail->id }}">
-                                                                關 閉
-                                                            </button>
-                                                        </div>
+                                        <!-- 修改細項資料彈窗 -->
+                                    @foreach($deliveryClientDetails as $clientorderdetail)
+                                        <div id="editModal-{{ $clientorderdetail->id }}" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static] flex items-center">
+                                            <div class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                                                <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                                                    <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+                                                        <h3 class="font-bold text-gray-800 dark:text-white">修改送貨單細項</h3>
+                                                        <button type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#editModal-{{ $clientorderdetail->id }}">
+                                                            <span class="sr-only">Close</span>
+                                                            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="p-4 overflow-y-auto h-auto">
+                                                        <form id="editForm-{{ $clientorderdetail->id }}" method="POST" action="#"> 
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" id="editIndex" name="editIndex" value="{{ $clientorderdetail->id }}">
+                                                            <div class="mb-4">
+                                                                <label for="editName-{{ $clientorderdetail->id }}" class="block text-sm font-medium mb-2">商品名稱</label>
+                                                                <input type="text" id="editName-{{ $clientorderdetail->id }}" name="editName" class="py-2 px-3 block w-full border-gray-300 rounded-lg" value="{{ $clientorderdetail->name }}">
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <label for="editSpecification-{{ $clientorderdetail->id }}" class="block text-sm font-medium mb-2">規格</label>
+                                                                <input type="text" id="editSpecification-{{ $clientorderdetail->id }}" name="editSpecification" class="py-2 px-3 block w-full border-gray-300 rounded-lg" value="{{ $clientorderdetail->specification }}">
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <label for="editQuantity-{{ $clientorderdetail->id }}" class="block text-sm font-medium mb-2">數量</label>
+                                                                <input type="number" id="editQuantity-{{ $clientorderdetail->id }}" name="editQuantity" class="py-2 px-3 block w-full border-gray-300 rounded-lg" value="{{ $clientorderdetail->quantity }}">
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <label for="editWeight-{{ $clientorderdetail->id }}" class="block text-sm font-medium mb-2">重量</label>
+                                                                <input type="text" id="editWeight-{{ $clientorderdetail->id }}" name="editWeight" class="py-2 px-3 block w-full border-gray-300 rounded-lg" value="{{ $clientorderdetail->weight }}">
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <label for="editDescription-{{ $clientorderdetail->id }}" class="block text-sm font-medium mb-2">備註</label>
+                                                                <input type="text" id="editDescription-{{ $clientorderdetail->id }}" name="editDescription" class="py-2 px-3 block w-full border-gray-300 rounded-lg" value="{{ $clientorderdetail->description }}">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
+                                                        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#editModal-{{ $clientorderdetail->id }}">
+                                                            取消
+                                                        </button>
+                                                        <button type="submit" form="editForm-{{ $clientorderdetail->id }}" class="py-2 px-4 bg-blue-600 text-white rounded-lg">修改</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endif
-                                        @endforeach
-                                        <!-- End 資料彈出視窗 -->
-
-
+                                        </div>
                                     @endforeach
+
                                     <!-- 填充表身高度 -->
                                     @if($deliveryClientDetails->count() != 9)
                                         @php
@@ -246,5 +298,46 @@
         </div>
 
     @endsection
+    <script>
 
+    // 打開彈窗
+    document.getElementById('orderDetails').addEventListener('click', function (e) {
+    if (e.target && e.target.classList.contains('editRow')) {
+    const index = e.target.getAttribute('data-index');
 
+    // 填充彈窗中的資料
+    document.getElementById('editIndex').value = index;
+    document.getElementById('editName').value = document.getElementById('name_' + index).value;
+    document.getElementById('editSpecification').value = document.getElementById('specification_' + index).value;
+    document.getElementById('editQuantity').value = document.getElementById('quantity_' + index).value;
+    document.getElementById('editWeight').value = document.getElementById('weight_' + index).value;
+    document.getElementById('editDescription').value = document.getElementById('description_' + index).value;
+
+    // 顯示彈窗
+    document.getElementById('editModal').classList.remove('hidden');
+    }
+    });
+
+    // 關閉彈窗
+    document.getElementById('cancelEdit').addEventListener('click', function () {
+    document.getElementById('editModal').classList.add('hidden');
+    });
+
+    // 提交修改
+    document.getElementById('editForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // 防止表單提交
+
+    const index = document.getElementById('editIndex').value;
+
+    // 更新相應行的資料
+    document.getElementById('name_' + index).value = document.getElementById('editName').value;
+    document.getElementById('specification_' + index).value = document.getElementById('editSpecification').value;
+    document.getElementById('quantity_' + index).value = document.getElementById('editQuantity').value;
+    document.getElementById('weight_' + index).value = document.getElementById('editWeight').value;
+    document.getElementById('description_' + index).value = document.getElementById('editDescription').value;
+
+    // 隱藏彈窗
+    document.getElementById('editModal').classList.add('hidden');
+    });
+
+    </script>
